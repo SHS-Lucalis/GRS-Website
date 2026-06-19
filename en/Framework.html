@@ -1,0 +1,432 @@
+<!--
+title: framework
+description: 
+published: true
+date: 2026-06-19T19:43:40.159Z
+tags: 
+editor: code
+dateCreated: 2026-06-19T19:43:40.159Z
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHS Modular Framework Guide</title>
+<style>
+:root {
+  --bg:#0b1117; --panel:#121b25; --panel2:#172232; --text:#eaf1f8; --muted:#aab8c7;
+  --line:#2a3a4d; --blue:#4db7ff; --red:#ff5a6b; --green:#72e0a4; --warn:#ffd166;
+  --code:#071018;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#091018,#101821 42%,#0b1117);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{padding:42px 24px 28px;border-bottom:1px solid var(--line);background:radial-gradient(circle at top left,rgba(77,183,255,.22),transparent 36%),radial-gradient(circle at top right,rgba(255,90,107,.15),transparent 28%)}
+.wrap{max-width:1180px;margin:0 auto}
+.eyebrow{color:var(--blue);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem}
+h1{font-size:clamp(2rem,5vw,4.2rem);line-height:1;margin:.35em 0 .25em}
+h2{font-size:2rem;margin:2.1em 0 .6em;border-bottom:1px solid var(--line);padding-bottom:.35em}
+h3{font-size:1.35rem;margin:1.4em 0 .45em;color:#dcecff}
+p{margin:.65em 0;color:var(--text)}
+.lead{font-size:1.16rem;color:#d8e7f7;max-width:920px}
+nav{position:sticky;top:0;z-index:10;background:rgba(11,17,23,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:10px;overflow:auto;padding:10px 18px}
+nav a{white-space:nowrap;color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:7px 11px;border-radius:999px;font-size:.92rem}
+nav a:hover{color:white;border-color:var(--blue)}
+main{padding:24px}
+.card{background:linear-gradient(180deg,var(--panel),#0f1721);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.kpi{border-left:4px solid var(--blue)}
+.kpi.red{border-left-color:var(--red)}
+.kpi.green{border-left-color:var(--green)}
+.kpi.warn{border-left-color:var(--warn)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:.8em 0}
+.badge{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:5px 9px;background:rgba(255,255,255,.03);font-size:.88rem;color:#dcecff}
+.badge.blue{border-color:rgba(77,183,255,.55);color:#bfe8ff}
+.badge.red{border-color:rgba(255,90,107,.55);color:#ffd0d6}
+.badge.green{border-color:rgba(114,224,164,.55);color:#d5ffe7}
+table{width:100%;border-collapse:collapse;margin:14px 0;overflow:hidden;border-radius:12px;border:1px solid var(--line)}
+th,td{padding:12px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{width:31%;text-align:left;background:rgba(77,183,255,.07);color:#d7efff;font-weight:700}
+tr:last-child th,tr:last-child td{border-bottom:0}
+code,kbd{background:var(--code);border:1px solid #1d3042;border-radius:6px;padding:.12em .35em;color:#d7f0ff}
+pre{background:var(--code);border:1px solid #1d3042;border-radius:14px;padding:15px;overflow:auto;color:#d7f0ff;line-height:1.45}
+pre code{background:transparent;border:0;padding:0}
+.callout{border-left:4px solid var(--warn);background:rgba(255,209,102,.08);padding:14px 16px;border-radius:12px;margin:16px 0}
+.danger{border-left-color:var(--red);background:rgba(255,90,107,.08)}
+.ok{border-left-color:var(--green);background:rgba(114,224,164,.08)}
+.flow{counter-reset:step;display:grid;gap:12px}
+.step{position:relative;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:15px 15px 15px 54px}
+.step:before{counter-increment:step;content:counter(step);position:absolute;left:16px;top:16px;background:var(--blue);color:#061018;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800}
+.small{font-size:.92rem;color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:24px;color:var(--muted)}
+@media print {
+  nav{display:none} body{background:white;color:#111} .card,.step,pre,table{break-inside:avoid} .card{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Shadow Haven Studios</div>
+    <h1>SHS Modular Framework Guide</h1>
+    <p class="lead">A practical how-to for configuring SHS modular inventory storage, item routing, pouch/placard cells, visual placement offsets, loadout areas, and compatibility-safe item types in Arma Reforger Workbench.</p>
+    <div class="badges">
+      <span class="badge blue">Policy-driven slots</span>
+      <span class="badge blue">Family-based routing</span>
+      <span class="badge green">Exact prefab overrides</span>
+      <span class="badge red">Occupancy protection</span>
+      <span class="badge">Loadout area extensions</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#overview">Overview</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#item-types">Item Types</a>
+    <a href="#storage">Storage Setup</a>
+    <a href="#placement">Placement</a>
+    <a href="#loadout-areas">Loadout Areas</a>
+    <a href="#recipes">How-To Recipes</a>
+    <a href="#troubleshooting">Troubleshooting</a>
+    <a href="#checklist">Checklist</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="overview">
+<h2>1. What this framework does</h2>
+<div class="grid">
+  <div class="card kpi">
+    <h3>Policy-driven routing</h3>
+    <p>Items are not thrown into the first vanilla-compatible slot. SHS checks the configured slot policy, item family, exact prefab rule, slot category, and occupancy group before accepting an insert.</p>
+  </div>
+  <div class="card kpi green">
+    <h3>Compatibility-safe item typing</h3>
+    <p>SHS uses its own <code>ECommonItemType</code> values and normalizes external names through aliases instead of depending on another framework’s implementation.</p>
+  </div>
+  <div class="card kpi red">
+    <h3>Physical-space protection</h3>
+    <p>Multiple visual variants can share one <code>m_SHS_OccupancyGroup</code>. Once one variant is filled, the other variants in that group are blocked.</p>
+  </div>
+  <div class="card kpi warn">
+    <h3>Visual placement control</h3>
+    <p><code>SHS_MagPlacementComponent</code> applies local offset and angle data after the engine attaches the item, preventing the engine attach pass from wiping the transform.</p>
+  </div>
+</div>
+
+<div class="callout ok">
+<strong>Core concept:</strong> Configure the slot, not the item insertion path. The router scans actual storage slots, scores valid candidates, and inserts into the best configured destination.
+</div>
+</section>
+
+<section id="architecture">
+<h2>2. File and class map</h2>
+<p>Use this as the source map when editing or extending the framework.</p>
+<table><tbody><tr><th>Scripts/Game/SHS ItemTypes MSC.c</th><td>SHS-owned ECommonItemType categories, ammo/utility types, and auto-routed sentinel range.</td></tr><tr><th>Scripts/Game/Vissible item types.c</th><td>First-person hide behavior for auto-routed types plus manual extra hide types.</td></tr><tr><th>Scripts/Game/INV Managers/SHS_EquipmentStorageSlot.c</th><td>Primary slot rules: category matching, exact-prefab filtering, occupancy groups, family rebound, placement transform.</td></tr><tr><th>Scripts/Game/INV Managers/SHS_EquipmentStorageComponent.c</th><td>Storage component policy flag and component-level slot validation.</td></tr><tr><th>Scripts/Game/INV Managers/SHS_PolicyDrivenStorageSlot.c</th><td>Base class for specialized policy slots such as radio, patch, grenade, and holster slots.</td></tr><tr><th>Scripts/Game/INV Managers/SHS_ItemClassificationService.c</th><td>Single source of truth for item families, type normalization, resource checks, and auto-routed detection.</td></tr><tr><th>Scripts/Game/INV Managers/SHS_StorageRouteResolver.c</th><td>Candidate collection, scoring, selection, and execution of insert/move routes.</td></tr><tr><th>Scripts/Game/INV Managers/SHS_MagGrenadePolicyRouter.c</th><td>Slot-driven magazine/grenade/utility routing through actual configured storage slots.</td></tr><tr><th>Scripts/Game/INV Managers/SHS_MagPlacementComponent.c</th><td>Per-slot visual offset/rotation mapping by prefab, category, and placement ID.</td></tr><tr><th>Scripts/Game/INV Managers/SHS_ItemTypeOverrideComponent.c</th><td>Optional per-prefab type override when external CommonItemType values should not be trusted.</td></tr><tr><th>Scripts/Game/INV Managers/SHS_ExternalCompatibilityAliases.c</th><td>Normalizes external framework names such as GRS_* into SHS-owned categories.</td></tr><tr><th>Scripts/Game/Loadout/Area Routing Types.c</th><td>LoadoutAreaType-to-family registry for cloth/gear compatibility queries.</td></tr><tr><th>Scripts/Game/Loadout/SHS_ClothAreaExtensionComponent.c</th><td>Adds extra SHS area types to cloth prefabs without changing the engine’s canonical area.</td></tr></tbody></table>
+
+<h3>Routing flow</h3>
+<div class="flow">
+  <div class="step"><strong>Item enters inventory logic.</strong> The modded inventory manager/interceptor checks whether SHS needs to handle the request or pass it through.</div>
+  <div class="step"><strong>Item is classified.</strong> <code>SHS_ItemClassificationService</code> resolves item/resource family from SHS types, additional type sidecars, override components, or compatibility aliases.</div>
+  <div class="step"><strong>Slots are scanned.</strong> The resolver looks through managed storages and asks each slot whether it can accept the item/resource.</div>
+  <div class="step"><strong>Candidate is scored.</strong> Exact prefab matches, policy slots, route priority, and family/category compatibility determine the winner.</div>
+  <div class="step"><strong>Route executes.</strong> The inventory manager inserts or moves the item to the selected storage/slot.</div>
+  <div class="step"><strong>Post-attach correction runs.</strong> Stored physics is suspended, placement transform is applied, and incompatible direct attachments can be bounced back through SHS routing.</div>
+</div>
+</section>
+
+<section id="item-types">
+<h2>3. Item types and families</h2>
+<p>The framework groups item types into semantic families. A slot does not merely ask “does this item have a common type?” It asks “does this item belong to the same family as this slot, and does it match the configured subcategory when required?”</p>
+
+<h3>SHS item families</h3>
+<div class="badges">
+<span class="badge blue">AMMO</span><span class="badge blue">SMOKE</span><span class="badge blue">GRENADE</span><span class="badge blue">RADIO</span><span class="badge blue">PATCH</span><span class="badge blue">POUCH</span><span class="badge blue">ATAK</span><span class="badge blue">AUTO</span>
+</div>
+
+<h3>Important SHS common item types</h3>
+<div class="badges">
+<span class="badge">SHS_ATAK</span><span class="badge">SHS_RADIO</span><span class="badge">SHS_PATCH</span><span class="badge">SHS_GRENADE</span><span class="badge">SHS_SMOKE_GRENADE</span><span class="badge">SHS_PISTOL_AMMO</span><span class="badge">SHS_RIFLE_AMMO</span><span class="badge">SHS_MARKSMAN_AMMO</span><span class="badge">SHS_MG_AMMO</span><span class="badge">SHS_AK_AMMO</span><span class="badge">SHS_GL_AMMO</span><span class="badge">SHS_Pouch</span><span class="badge">SHS_EAR_LEFT</span><span class="badge">SHS_EAR_RIGHT</span><span class="badge">SHS_EAR_LEFT_REAR_MOUNT</span><span class="badge">SHS_EAR_Right_REAR_MOUNT</span><span class="badge">SHS_NightVision</span><span class="badge">SHS_RailLiteRight</span><span class="badge">SHS_RailLiteLeft</span><span class="badge">SHS_Waist</span><span class="badge">SHS_R_Leg</span><span class="badge">SHS_L_Leg</span><span class="badge">SHS_Sling</span><span class="badge">SHS_Mask</span>
+</div>
+
+<div class="callout">
+<strong>Auto-routed range:</strong> Any type placed between <code>SHS_AUTO_ROUTED_BEGIN</code> and <code>SHS_AUTO_ROUTED_END</code> becomes part of the AUTO family, participates in SHS policy routing, and is hidden in first person. Do not assign the sentinel markers themselves to prefabs.
+</div>
+
+<h3>How type resolution works</h3>
+<table>
+<thead><tr><th>Source</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><th>Native / vanilla common type</th><td>Basic item classification when the prefab already has a reliable <code>ECommonItemType</code>.</td></tr>
+<tr><th><code>m_SHS_AdditionalCommonItemTypes</code></th><td>Sidecar list for items that need one or more SHS routing tags without breaking their original type.</td></tr>
+<tr><th><code>SHS_ItemTypeOverrideComponent</code></th><td>Prefab-level override used when SHS should classify the item before trusting shared or external common types.</td></tr>
+<tr><th><code>SHS_ExternalCompatibilityAliases</code></th><td>Normalizes external names such as <code>GRS_RIFLE_AMMO</code> into SHS-owned types such as <code>SHS_RIFLE_AMMO</code>.</td></tr>
+</tbody>
+</table>
+
+<h3>Recommended item tagging rule</h3>
+<pre><code>// For SHS-owned items:
+Use SHS-owned ECommonItemType values directly or through m_SHS_AdditionalCommonItemTypes.
+
+// For compatibility with external frameworks:
+Prefer SHS_ItemTypeOverrideComponent or the additional sidecar list.
+
+// For AUTO routed helmet/gear accessories:
+Add the item type between SHS_AUTO_ROUTED_BEGIN and SHS_AUTO_ROUTED_END,
+then configure the destination slot's m_SHS_MagCategory to that exact type.</code></pre>
+</section>
+
+<section id="storage">
+<h2>4. Storage and slot setup</h2>
+
+<h3>Primary slot attributes</h3>
+<table><tbody><tr><th>m_SHS_MagCategory</th><td>CommonItemType/category gate. Set this to the SHS category the slot should accept, such as SHS_RIFLE_AMMO, SHS_RADIO, SHS_GRENADE, SHS_EAR_LEFT, etc.</td></tr><tr><th>m_SHS_SlotID</th><td>Human-readable routing/placement ID. This must match SHS_MagPlacementData.PlacementID when visual offset/angles are used.</td></tr><tr><th>m_SHS_ItemPrefab</th><td>Exact prefab/resource rule. Leave blank for category fallback; fill it when one exact item must win this slot.</td></tr><tr><th>m_SHS_OccupancyGroup</th><td>Logical physical-space lock. Slots with the same group block each other so variants cannot double-fill the same visual cell.</td></tr></tbody></table>
+
+<h3>Policy-driven equipment storage</h3>
+<p>Use <code>SHS_EquipmentStorageComponent</code> for placards, belt cells, and visible item cells that need SHS slot rules. Enable its policy-driven flag for SHS-controlled cell routing.</p>
+<pre><code>Storage owner prefab
+└─ SHS_EquipmentStorageComponent
+   ├─ m_bSHS_PolicyDriven = true
+   ├─ Slot 0: SHS_EquipmentStorageSlot
+   │  ├─ m_SHS_MagCategory = SHS_RIFLE_AMMO
+   │  ├─ m_SHS_SlotID = Placard_Cell_01
+   │  └─ m_SHS_OccupancyGroup = Placard_Cell_01
+   ├─ Slot 1: SHS_EquipmentStorageSlot
+   │  ├─ m_SHS_MagCategory = SHS_PISTOL_AMMO
+   │  ├─ m_SHS_SlotID = Belt_Cell_01
+   │  └─ m_SHS_OccupancyGroup = Belt_Cell_01
+   └─ Slot 2: SHS_EquipmentStorageSlot
+      ├─ m_SHS_MagCategory = SHS_SMOKE_GRENADE
+      ├─ m_SHS_SlotID = Chest_Left_01
+      └─ m_SHS_OccupancyGroup = Chest_Left_01</code></pre>
+
+<h3>Special policy slots</h3>
+<table>
+<thead><tr><th>Slot class</th><th>Use case</th></tr></thead>
+<tbody>
+<tr><th><code>SHS_RadioStorageSlot</code></th><td>Radio pouch or radio cell. Accepts radio components and/or <code>SHS_RADIO</code> typed items.</td></tr>
+<tr><th><code>SHS_NadeStorageSlot</code></th><td>Explosive / grenade-oriented slot for grenade pouch behavior.</td></tr>
+<tr><th><code>SHS_PatchStorageSlot</code></th><td>Patch/admin/ID slot accepting <code>SHS_PATCH</code>.</td></tr>
+<tr><th><code>SHS_HolsterStorageSlot</code></th><td>Sidearm-specific holster behavior using configured weapon type checks.</td></tr>
+<tr><th><code>SHS_AccessorySlot</code></th><td>Chest accessory style slot with allowed type arrays for extra filtering.</td></tr>
+</tbody>
+</table>
+
+<div class="callout danger">
+<strong>Avoid mixed-family fallback:</strong> A <code>NONE</code> slot category is treated as legacy ammo fallback. Do not use <code>NONE</code> for radios, smoke, grenades, patches, or AUTO gear. Give utility slots an explicit SHS category.
+</div>
+</section>
+
+<section id="placement">
+<h2>5. Visual placement offsets and rotations</h2>
+<p>Attach <code>SHS_MagPlacementComponent</code> to the storage owner when a stored item needs local visual adjustment after insertion.</p>
+
+<h3>Placement fields</h3>
+<table>
+<thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><th><code>Prefab</code></th><td>Exact item prefab/resource path. Highest-priority placement match. Leave blank for type or slot fallback.</td></tr>
+<tr><th><code>MagType</code></th><td>Fallback common item type, such as <code>SHS_RIFLE_AMMO</code>.</td></tr>
+<tr><th><code>PlacementID</code></th><td>Must match the slot’s <code>m_SHS_SlotID</code>.</td></tr>
+<tr><th><code>Offset</code></th><td>Local position offset applied after item attachment.</td></tr>
+<tr><th><code>Angles</code></th><td>Local rotation in Enfusion angle vector format.</td></tr>
+</tbody>
+</table>
+
+<h3>Example placement setup</h3>
+<pre><code>SHS_MagPlacementComponent.m_aPlacements:
+  Entry 0:
+    Prefab      = ""                         // optional exact prefab override
+    MagType     = "SHS_RIFLE_AMMO"
+    PlacementID = "Placard_Cell_01"
+    Offset      = "0.015 0.020 -0.005"
+    Angles      = "0 90 0"
+
+Slot:
+  m_SHS_MagCategory   = SHS_RIFLE_AMMO
+  m_SHS_SlotID        = Placard_Cell_01
+  m_SHS_OccupancyGroup= Placard_Cell_01</code></pre>
+
+<div class="callout">
+<strong>Why PlacementID matters:</strong> the item is first attached by the engine, then SHS looks up a placement using the attached item and the slot ID. If the placement ID and slot ID do not match exactly, no visual offset is applied.
+</div>
+</section>
+
+<section id="loadout-areas">
+<h2>6. Loadout area routing</h2>
+<p>Loadout areas are handled through a separate family registry. This lets SHS reason about equivalent areas without forcing every item to share the same engine-level canonical area.</p>
+
+<h3>Current area families</h3>
+<div class="badges">
+<span class="badge green">HEAD_COVER</span><span class="badge green">NVG_MOUNT</span><span class="badge green">NIGHTVISION</span><span class="badge green">EAR_LEFT</span><span class="badge green">EAR_RIGHT</span><span class="badge green">HELMET_RAIL</span><span class="badge green">HELMET_TOP</span><span class="badge green">HELMET_FRONT</span><span class="badge green">HELMET_LIGHT</span><span class="badge green">WAIST</span><span class="badge green">LEG_LEFT</span><span class="badge green">LEG_RIGHT</span><span class="badge green">SLING</span><span class="badge green">MASK</span><span class="badge green">BACKPANEL</span><span class="badge green">PLACARD</span><span class="badge green">BELT</span><span class="badge green">CARABINER</span>
+</div>
+
+<h3>How to add a new routable area</h3>
+<pre><code>// 1. Define the area class.
+class SHS_My_New_Area : LoadoutAreaType {};
+
+// 2. Add a family if no existing family fits.
+enum SHS_EAreaFamily
+{
+    // existing values...
+    MY_NEW_FAMILY
+}
+
+// 3. Register the area-to-family mapping.
+new SHS_AreaRoutingMapping(SHS_My_New_Area, SHS_EAreaFamily.MY_NEW_FAMILY)</code></pre>
+
+<div class="callout danger">
+<strong>Important:</strong> area-family routing does not override the engine’s equip acceptance by itself. If a cloth prefab must satisfy extra SHS-side areas, add <code>SHS_ClothAreaExtensionComponent</code> and list the additional area types there.
+</div>
+</section>
+
+<section id="recipes">
+<h2>7. How-to recipes</h2>
+
+<h3>Recipe A — Create a rifle-mag placard cell</h3>
+<div class="flow">
+  <div class="step">On the placard/storage owner, add or use <code>SHS_EquipmentStorageComponent</code>.</div>
+  <div class="step">Set <code>m_bSHS_PolicyDriven</code> to <code>true</code>.</div>
+  <div class="step">Add an <code>SHS_EquipmentStorageSlot</code>.</div>
+  <div class="step">Set <code>m_SHS_MagCategory</code> to <code>SHS_RIFLE_AMMO</code>.</div>
+  <div class="step">Set <code>m_SHS_SlotID</code> to a unique visual ID, for example <code>Placard_Cell_01</code>.</div>
+  <div class="step">Set <code>m_SHS_OccupancyGroup</code> to the same physical group, for example <code>Placard_Cell_01</code>.</div>
+  <div class="step">Optional: add a placement entry with <code>PlacementID = Placard_Cell_01</code>.</div>
+</div>
+
+<h3>Recipe B — Create multiple visual variants for one physical cell</h3>
+<p>Use different slot IDs but the same occupancy group. This lets STANAG, AK, DMR, or MG variants have different visuals while still occupying one physical cell.</p>
+<pre><code>Slot A:
+  m_SHS_MagCategory    = SHS_RIFLE_AMMO
+  m_SHS_SlotID         = STANAG_01
+  m_SHS_OccupancyGroup = Placard_Cell_01
+
+Slot B:
+  m_SHS_MagCategory    = SHS_AK_AMMO
+  m_SHS_SlotID         = AK_01
+  m_SHS_OccupancyGroup = Placard_Cell_01
+
+Slot C:
+  m_SHS_MagCategory    = SHS_MARKSMAN_AMMO
+  m_SHS_SlotID         = DMR_01
+  m_SHS_OccupancyGroup = Placard_Cell_01</code></pre>
+
+<h3>Recipe C — Add a new ammo category</h3>
+<div class="flow">
+  <div class="step">Add a new SHS-owned value to <code>ECommonItemType</code>, such as <code>SHS_SHOTGUN_AMMO</code>.</div>
+  <div class="step">Update <code>SHS_ItemClassificationService.SHS_IsAmmoCategory()</code> so the new type resolves to the AMMO family.</div>
+  <div class="step">Tag the item prefab using its common type, additional type sidecar, or <code>SHS_ItemTypeOverrideComponent</code>.</div>
+  <div class="step">Create one or more slots with <code>m_SHS_MagCategory = SHS_SHOTGUN_AMMO</code>.</div>
+  <div class="step">Add placement entries where needed.</div>
+</div>
+
+<h3>Recipe D — Add an auto-routed headset, NVG, or rail accessory</h3>
+<div class="flow">
+  <div class="step">Add the new <code>ECommonItemType</code> between <code>SHS_AUTO_ROUTED_BEGIN</code> and <code>SHS_AUTO_ROUTED_END</code>.</div>
+  <div class="step">Tag the item prefab with that new type or add it to <code>m_SHS_AdditionalCommonItemTypes</code>.</div>
+  <div class="step">Create a destination slot with <code>m_SHS_MagCategory</code> set to that exact type.</div>
+  <div class="step">Use a position-specific type for position-specific gear, for example left ear versus right ear.</div>
+  <div class="step">Do not manually add the type to first-person hide logic unless it is outside the sentinel range.</div>
+</div>
+
+<h3>Recipe E — Make a radio pouch</h3>
+<div class="flow">
+  <div class="step">Use a pouch/storage component that contains a policy slot.</div>
+  <div class="step">Add <code>SHS_RadioStorageSlot</code> as the storage slot.</div>
+  <div class="step">Tag radio items with <code>SHS_RADIO</code> or ensure they have a radio component detected by classification.</div>
+  <div class="step">Do not rely on a generic <code>NONE</code> mag slot for radios.</div>
+</div>
+
+<h3>Recipe F — Add external compatibility without taking dependency on another framework</h3>
+<div class="flow">
+  <div class="step">Add string normalization inside <code>SHS_ExternalCompatibilityAliases.NormalizeExternalItemTypeName()</code>.</div>
+  <div class="step">Map the external name to an SHS-owned category, for example <code>External_RIFLE_AMMO</code> to <code>SHS_RIFLE_AMMO</code>.</div>
+  <div class="step">Keep SHS routing pointed at SHS-owned categories.</div>
+  <div class="step">Avoid importing or directly requiring external framework classes unless runtime-detected by string.</div>
+</div>
+</section>
+
+<section id="troubleshooting">
+<h2>8. Troubleshooting</h2>
+<table>
+<thead><tr><th>Problem</th><th>Likely cause and fix</th></tr></thead>
+<tbody>
+<tr><th>Item goes to cell 1 or wrong cell</th><td>The target slot may have <code>m_SHS_MagCategory = NONE</code>, missing policy-driven storage, or missing item type tagging. Set a specific SHS category and verify the item resolves to the same family/category.</td></tr>
+<tr><th>Radio / smoke / grenade goes into mag slot</th><td>A generic fallback slot is being treated as ammo. Give utility slots explicit categories and use specialized policy slots where applicable.</td></tr>
+<tr><th>Two variants fill the same physical location</th><td>The visual variant slots do not share the same <code>m_SHS_OccupancyGroup</code>. Assign the same group to all mutually-exclusive variants.</td></tr>
+<tr><th>Item accepts in Workbench but routes wrong in game</th><td>Direct attachment paths may bypass the normal insert route. Check family rebound logs if enabled and confirm <code>IsItemCompatible</code> would accept the item.</td></tr>
+<tr><th>Offset/rotation does not apply</th><td>The storage owner may be missing <code>SHS_MagPlacementComponent</code>, or <code>PlacementID</code> does not exactly match the slot’s <code>m_SHS_SlotID</code>.</td></tr>
+<tr><th>Auto-routed item does not hide in first person</th><td>The item type may not be between the auto-routed sentinel markers, or the prefab is missing the additional/common type tag. For native types, add to <code>SHS_FP_HIDE_EXTRA_TYPES</code>.</td></tr>
+<tr><th>External framework item is not recognized</th><td>Add or correct a normalization entry in <code>SHS_ExternalCompatibilityAliases</code>, then verify the final name maps to a valid SHS common type.</td></tr>
+<tr><th>Cloth item should count as another area but does not</th><td>Area families do not change engine equip acceptance. Add <code>SHS_ClothAreaExtensionComponent</code> with the additional SHS area types.</td></tr>
+</tbody>
+</table>
+
+<h3>Debug knobs</h3>
+<pre><code>SHS_MagGrenadePolicyRouter.SHS_DEBUG_ROUTING = true
+SHS_EquipmentStorageSlot.SHS_DEBUG_REBOUND = true</code></pre>
+<p class="small">Keep debug flags disabled in shipping builds to avoid log spam.</p>
+</section>
+
+<section id="checklist">
+<h2>9. Authoring checklist</h2>
+<div class="card">
+<h3>Before testing a new modular item</h3>
+<ul>
+  <li>Item prefab has a valid SHS common type, additional type, or override component.</li>
+  <li>Destination storage uses the correct SHS storage/component class.</li>
+  <li>Policy-driven storage is enabled where required.</li>
+  <li>Slot category matches the intended item family and subcategory.</li>
+  <li>Slot ID is unique enough for diagnostics and placement lookup.</li>
+  <li>Occupancy group is shared by all variants of the same physical space.</li>
+  <li>Placement component exists on the storage owner if offsets/angles are needed.</li>
+  <li>PlacementID exactly matches the slot ID.</li>
+  <li>External names are normalized to SHS-owned categories.</li>
+  <li>Auto-routed gear is inside the sentinel range and has position-specific slot categories where needed.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Recommended naming convention</h3>
+<pre><code>Slot IDs:
+  Placard_Cell_01
+  Placard_Cell_02
+  Belt_Cell_01
+  Chest_Left_01
+  Ear_Left_01
+  Helmet_Rail_Right_01
+
+Occupancy groups:
+  Placard_Cell_01
+  Belt_Cell_01
+  Ear_Left
+  Helmet_Rail_Right
+
+Item types:
+  SHS_RIFLE_AMMO
+  SHS_PISTOL_AMMO
+  SHS_RADIO
+  SHS_EAR_LEFT
+  SHS_RailLiteRight</code></pre>
+</div>
+
+<div class="callout ok">
+<strong>Best practice:</strong> keep routing category, slot ID, occupancy group, and placement ID intentionally separate. Category answers “what item is allowed?” Slot ID answers “which visual slot is this?” Occupancy group answers “what physical space is occupied?” Placement ID answers “which transform should be applied?”
+</div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Generated from the attached SHS Modular Framework script package. This guide is intended as a practical Workbench authoring reference for SHS developers and compatible add-on authors.</p>
+  </div>
+</footer>
+</body>
+</html>
