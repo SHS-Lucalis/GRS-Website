@@ -2,60 +2,265 @@
 title: Drive-By
 description: 
 published: true
-date: 2026-07-10T21:41:06.175Z
+date: 2026-07-10T21:42:00.257Z
 tags: 
 editor: code
 dateCreated: 2026-07-10T21:41:06.175Z
 -->
 
-# SHS Drive By — Vehicle Setup Guide
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHS Drive By — Setup &amp; Vehicle Configuration Guide</title>
+<style>
+  :root{
+    --bg:#0e1116;
+    --panel:#161b22;
+    --panel-2:#1c232d;
+    --border:#2a323d;
+    --text:#d7dde5;
+    --muted:#9aa6b2;
+    --accent:#e8a43c;
+    --accent-2:#4aa3ff;
+    --code-bg:#0b0e13;
+    --green:#3fb950;
+    --red:#f0645d;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:40px 22px 80px;}
+  header.hero{
+    border:1px solid var(--border);
+    background:linear-gradient(135deg,#1a2029,#12161c);
+    border-radius:var(--radius);
+    padding:34px 30px;
+    margin-bottom:34px;
+  }
+  header.hero .kicker{
+    color:var(--accent);
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:12px;
+    margin:0 0 10px;
+  }
+  header.hero h1{margin:0 0 8px;font-size:30px;line-height:1.2;}
+  header.hero p{margin:0;color:var(--muted);}
+  h2{
+    margin:46px 0 14px;
+    font-size:22px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--border);
+    scroll-margin-top:20px;
+  }
+  h3{margin:28px 0 10px;font-size:17px;color:#eef2f7;}
+  p{margin:0 0 14px;}
+  a{color:var(--accent-2);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  code{
+    background:var(--code-bg);
+    border:1px solid var(--border);
+    border-radius:5px;
+    padding:1px 6px;
+    font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:13.5px;
+    color:#f0c778;
+  }
+  pre{
+    background:var(--code-bg);
+    border:1px solid var(--border);
+    border-left:3px solid var(--accent);
+    border-radius:var(--radius);
+    padding:16px 18px;
+    overflow-x:auto;
+    margin:0 0 18px;
+  }
+  pre code{background:none;border:none;padding:0;color:#cfe3ff;font-size:13px;line-height:1.6;}
+  .toc{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:20px 24px;
+    margin-bottom:10px;
+  }
+  .toc h4{margin:0 0 12px;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  .toc ol{margin:0;padding-left:20px;columns:2;column-gap:34px;}
+  .toc li{margin:4px 0;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:0 0 20px;
+    font-size:14.5px;
+    background:var(--panel);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  th,td{
+    text-align:left;
+    padding:10px 14px;
+    border-bottom:1px solid var(--border);
+    vertical-align:top;
+  }
+  th{background:var(--panel-2);color:#eef2f7;font-weight:600;}
+  tr:last-child td{border-bottom:none;}
+  td code{white-space:nowrap;}
+  .callout{
+    border-radius:var(--radius);
+    padding:14px 18px;
+    margin:0 0 18px;
+    border:1px solid var(--border);
+    background:var(--panel);
+  }
+  .callout.warn{border-left:3px solid var(--red);}
+  .callout.tip{border-left:3px solid var(--green);}
+  .callout .lbl{
+    display:block;font-weight:700;font-size:12px;letter-spacing:.08em;
+    text-transform:uppercase;margin-bottom:6px;
+  }
+  .callout.warn .lbl{color:var(--red);}
+  .callout.tip .lbl{color:var(--green);}
+  ul,ol{margin:0 0 16px;padding-left:22px;}
+  li{margin:6px 0;}
+  .pill{
+    display:inline-block;background:var(--panel-2);border:1px solid var(--border);
+    color:var(--accent);border-radius:20px;padding:2px 10px;font-size:12px;font-weight:600;
+    margin-right:4px;
+  }
+  hr{border:none;border-top:1px solid var(--border);margin:40px 0;}
+  footer{color:var(--muted);font-size:13px;text-align:center;margin-top:50px;}
+  .schema{color:#8b98a5;}
+  @media(max-width:640px){.toc ol{columns:1;}header.hero h1{font-size:24px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
 
-How to add drive-by shooting seats to any vehicle in the SHS Dive By addon. This is the exact configuration used by your working `UAZ469` and `M998` overrides — mirror it for new vehicles.
+<header class="hero">
+  <p class="kicker">SHS Drive By — Arma Reforger</p>
+  <h1>Setup &amp; Vehicle Configuration Guide</h1>
+  <p>Install the addon, then add drive-by shooting seats to any vehicle. Every template below is taken from the working UAZ&nbsp;469 and M998 configurations.</p>
+</header>
 
----
+<nav class="toc">
+  <h4>Contents</h4>
+  <ol>
+    <li><a href="#install">Installing the addon</a></li>
+    <li><a href="#how">How the system works</a></li>
+    <li><a href="#override">Create the override prefab</a></li>
+    <li><a href="#comp1">Component 1 — Compartment Manager</a></li>
+    <li><a href="#comp2">Component 2 — Actions Manager</a></li>
+    <li><a href="#fields">Field reference</a></li>
+    <li><a href="#idrule">The ID-matching rule</a></li>
+    <li><a href="#firing">Firing rules</a></li>
+    <li><a href="#checklist">Per-vehicle checklist</a></li>
+    <li><a href="#pitfalls">Pitfalls</a></li>
+  </ol>
+</nav>
 
-## 1. How the system works
+<!-- ============ INSTALL ============ -->
+<h2 id="install">1. Installing the addon</h2>
+<p>Before configuring anything you need the addon loaded in the Arma Reforger Workbench.</p>
 
-A drive-by seat is not a new component. You override a vanilla vehicle (or seat) prefab and inject data into **two components that already exist up the inheritance chain**. You must reuse their existing instance GUIDs — never fabricate a second copy of either component, or the vanilla seats get clobbered.
+<h3>Prerequisites</h3>
+<ul>
+  <li><strong>Arma Reforger + Arma Reforger Tools</strong> (the Workbench) installed.</li>
+  <li>A project/mod already created in Workbench, or the SHS Drive By addon folder placed in your <code>addons</code> directory.</li>
+</ul>
 
-The two components:
+<h3>Steps</h3>
+<ol>
+  <li>Place the <code>SHS Dive By</code> folder inside your Workbench addons directory
+    (e.g. <code class="schema">...\My Games\ArmaReforgerWorkbench\addons\SHS Dive By</code>).</li>
+  <li>Open <strong>Arma Reforger Tools → Workbench</strong> and load the project that contains the addon.</li>
+  <li>Let the <strong>Script Module compile</strong>. Watch the console — if any script fails to compile, the entire drive-by system is disabled (no seats, no logs). Fix compile errors before continuing.</li>
+  <li>In the Resource Browser, confirm the addon's prefabs and scripts appear under the <code>SHS Dive By</code> source.</li>
+  <li>Load a world with a supported vehicle and verify the extra <strong>"Get in" (Gunner)</strong> action shows on a drive-by seat.</li>
+</ol>
 
-1. **`SCR_BaseCompartmentManagerComponent`** — tags a vanilla seat slot with a *shoot-seat ID*.
-2. **`ActionsManagerComponent`** — holds the extra "Get in / Switch seat (Gunner)" action (`PS_ShootingSeatAction`) that actually puts you in the shooting pose.
+<div class="callout tip">
+  <span class="lbl">Verifying it's alive</span>
+  While you control your character the system prints a heartbeat to the console every ~2&nbsp;seconds
+  (<code>[SHS Monitor] …</code>). If you see the heartbeat, scripts compiled and the seat manager is running.
+  Entering a drive-by seat then prints <code>[SHS DriveBy] ToSlotState …</code>. No heartbeat at all means a
+  script failed to compile.
+</div>
 
-The link between them is the shoot-seat ID: the action's `m_iShootSeatId` must equal the compartment slot's `m_iShootSeatId_PS`. That pairing lets the code find the underlying seat (for door opening and occupancy checks).
+<div class="callout warn">
+  <span class="lbl">OneDrive warning</span>
+  If this addon lives in a OneDrive folder, files-on-demand can serve <em>stale or partially-synced</em> copies to
+  external tools, which looks like a "truncated" script. If a file appears cut-off, confirm it directly in Workbench
+  before assuming it's corrupt.
+</div>
 
-There are **two kinds of drive-by seat**:
+<hr>
 
-- **Pattern A — a drive-by version of an existing vanilla seat.** Uses a real compartment slot, an `m_iShootSeatId` that matches, and attaches to the seat's existing aim context.
-- **Pattern B — a brand-new standalone shooting position** (e.g. the M998 rear bench "gunner" spots). No compartment slot, no shoot-seat ID; you define its own aim context and enter it by switching seats.
+<!-- ============ HOW ============ -->
+<h2 id="how">2. How the system works</h2>
+<p>A drive-by seat is <strong>not</strong> a new component. You override a vanilla vehicle (or seat) prefab and inject
+data into <strong>two components that already exist up the inheritance chain</strong>. Reuse their existing instance
+GUIDs — never fabricate a second copy of either, or the vanilla seats get clobbered.</p>
 
----
+<table>
+  <tr><th>Component</th><th>Role</th></tr>
+  <tr><td><code>SCR_BaseCompartmentManagerComponent</code></td><td>Tags a vanilla seat slot with a <em>shoot-seat ID</em>.</td></tr>
+  <tr><td><code>ActionsManagerComponent</code></td><td>Holds the extra "Get in / Switch seat (Gunner)" action (<code>PS_ShootingSeatAction</code>) that puts you in the shooting pose.</td></tr>
+</table>
 
-## 2. Create the override prefab
+<p>The link between them is the shoot-seat ID: the action's <code>m_iShootSeatId</code> must equal the compartment
+slot's <code>m_iShootSeatId_PS</code>. That pairing lets the code find the underlying seat (for door opening and
+occupancy checks).</p>
 
-Do this in Workbench so the `.meta` and inheritance GUIDs are generated correctly (hand-typing GUIDs is the #1 way to break an override):
+<p>There are two kinds of drive-by seat:</p>
+<ul>
+  <li><span class="pill">Pattern A</span> A drive-by version of an <strong>existing vanilla seat</strong>. Uses a real compartment slot, a matching <code>m_iShootSeatId</code>, and the seat's existing aim context.</li>
+  <li><span class="pill">Pattern B</span> A <strong>brand-new standalone shooting position</strong> (e.g. the M998 rear bench "gunner" spots). No compartment slot, no shoot-seat ID; you define its own aim context and enter it by switching seats.</li>
+</ul>
 
-1. In the **Resource Browser**, find the vanilla prefab you want drive-by on — either the whole vehicle prefab or its seat/compartment sub-prefab.
-2. Right-click → **Create Prefab Variant / Inherit** into `SHS Dive By/Prefabs/Vehicles/...`, keeping the same folder layout as your existing UAZ/M998 overrides.
-3. Open the new override and add the two component blocks below.
+<hr>
 
-Your existing files are the reference structure the result should look like:
+<!-- ============ OVERRIDE ============ -->
+<h2 id="override">3. Create the override prefab</h2>
+<p>Do this in Workbench so the <code>.meta</code> and inheritance GUIDs are generated correctly — hand-typing resource
+GUIDs is the #1 way to break an override.</p>
+<ol>
+  <li>In the <strong>Resource Browser</strong>, find the vanilla prefab you want drive-by on — the whole vehicle prefab or its seat/compartment sub-prefab.</li>
+  <li>Right-click → <strong>Create Prefab Variant / Inherit</strong> into <code>SHS Dive By/Prefabs/Vehicles/…</code>, keeping the same folder layout as the existing UAZ/M998 overrides.</li>
+  <li>Open the new override and add the two component blocks described below.</li>
+</ol>
 
-- `Prefabs/Vehicles/Wheeled/UAZ469/UAZ469_base.et` — one Pattern A seat (simplest).
-- `Prefabs/Vehicles/Wheeled/UAZ469/VehParts/Seats/UAZ469_seats_rear.et` — three Pattern A seats on a seat sub-prefab.
-- `Prefabs/Vehicles/Wheeled/M998/M998_covered_base.et` — three Pattern A seats + two Pattern B seats.
+<p>Reference files already in the addon — the result should look like these:</p>
+<table>
+  <tr><th>File</th><th>Shows</th></tr>
+  <tr><td><code>UAZ469_base.et</code></td><td>One Pattern A seat (simplest).</td></tr>
+  <tr><td><code>UAZ469/VehParts/Seats/UAZ469_seats_rear.et</code></td><td>Three Pattern A seats on a seat sub-prefab.</td></tr>
+  <tr><td><code>M998_covered_base.et</code></td><td>Three Pattern A seats + two Pattern B seats.</td></tr>
+</table>
 
-> Whatever the inheritance header and `.meta` GUID end up being, they must match the working pattern in those files. The `.et` header (`Vehicle : "{GUID}path"`) is what the override inherits from; the `.meta` `Name "{GUID}path"` is the resource identity. Let Workbench set these — copy the *shape* from the files above, not the raw GUIDs.
+<div class="callout tip">
+  <span class="lbl">GUID rule</span>
+  The <code>.et</code> header <code>Vehicle : "{GUID}path"</code> is what the override <em>inherits</em> from; the
+  <code>.meta</code> <code>Name "{GUID}path"</code> is its resource identity. Let Workbench set these — copy the
+  <em>shape</em> from the working files, not the raw GUIDs.
+</div>
 
----
+<hr>
 
-## 3. Component 1 — SCR_BaseCompartmentManagerComponent
+<!-- ============ COMP 1 ============ -->
+<h2 id="comp1">4. Component 1 — SCR_BaseCompartmentManagerComponent</h2>
+<p>Re-declare the component <strong>by its existing instance GUID</strong> (find it in the vanilla prefab; both wheeled
+examples use <code>{20FB66C5DCB8DF72}</code>, but confirm per vehicle). List each vanilla seat slot you want drive-by on
+and give it a unique shoot-seat ID:</p>
 
-Re-declare the component **by its existing instance GUID** (find it in the vanilla prefab; on both your wheeled examples it is `{20FB66C5DCB8DF72}`, but confirm per vehicle). Inside, list each vanilla seat slot you want drive-by on and give it a unique shoot-seat ID:
-
-```
-SCR_BaseCompartmentManagerComponent "{20FB66C5DCB8DF72}" {
+<pre><code>SCR_BaseCompartmentManagerComponent "{20FB66C5DCB8DF72}" {
  CompartmentSlots {
   CargoCompartmentSlot Passenger_r01 {
    m_iShootSeatId_PS 1
@@ -64,51 +269,42 @@ SCR_BaseCompartmentManagerComponent "{20FB66C5DCB8DF72}" {
    m_iShootSeatId_PS 2
   }
  }
-}
-```
+}</code></pre>
 
-- `Passenger_r01`, `Passenger_l02`, … must be the **exact vanilla slot names** from that vehicle's compartment manager.
-- `m_iShootSeatId_PS` is any unique positive integer per seat (1, 2, 3 …).
-- **Pattern B seats do NOT get an entry here** — they have no vanilla slot.
+<ul>
+  <li><code>Passenger_r01</code>, <code>Passenger_l02</code>, … must be the <strong>exact vanilla slot names</strong> from that vehicle's compartment manager.</li>
+  <li><code>m_iShootSeatId_PS</code> is any unique positive integer per seat (1, 2, 3 …).</li>
+  <li><strong>Pattern B seats get no entry here</strong> — they have no vanilla slot.</li>
+</ul>
 
----
+<hr>
 
-## 4. Component 2 — ActionsManagerComponent
+<!-- ============ COMP 2 ============ -->
+<h2 id="comp2">5. Component 2 — ActionsManagerComponent</h2>
+<p>Re-declare it by its existing instance GUID (differs per vehicle; UAZ/M998 use <code>{C97BE5489221AE18}</code>). It has
+two sub-blocks: <code>ActionContexts</code> (Pattern B only) and <code>additionalActions</code> (one entry per seat).</p>
 
-Re-declare it by its existing instance GUID (find it in the vanilla prefab — it differs per vehicle; UAZ/M998 use `{C97BE5489221AE18}`). It has two sub-blocks: `ActionContexts` (only for Pattern B) and `additionalActions` (one entry per seat, both patterns).
+<h3>5a. ActionContexts <span class="pill">Pattern B</span></h3>
+<p>A new standalone position needs its own aim context — a <strong>new unique GUID</strong>, a <code>ContextName</code>,
+and a <code>Position</code> offset (the aim origin / where the prompt appears, relative to the vehicle):</p>
 
-```
-ActionsManagerComponent "{C97BE5489221AE18}" {
- ActionContexts {
-  // Pattern B only — see 4a
- }
- additionalActions {
-  // one PS_ShootingSeatAction per seat — see 4b
- }
-}
-```
-
-### 4a. ActionContexts (Pattern B only)
-
-A new standalone position needs its own aim context. Give it a **new unique GUID**, a `ContextName`, and a `Position` offset (the aim origin / where the prompt appears, relative to the vehicle):
-
-```
-UserActionContext "{6203372B06F9FFDC}" {
+<pre><code>UserActionContext "{6203372B06F9FFDC}" {
  ContextName "Passenger_r3"
  Position PointInfo "{6203372B1452F535}" {
   Offset 0.8283 1.2627 -1.7927
  }
-}
-```
+}</code></pre>
 
-Pattern A seats reuse the vanilla seat's existing context, so they need **no** `ActionContexts` entry — unless you want to nudge the aim origin, in which case re-declare the vanilla context by its GUID and set a `Position` (this is what `UAZ469_seats_rear.et` does with `passengerL_idle` etc.).
+<p>Pattern A seats reuse the vanilla seat's existing context, so they need <strong>no</strong> <code>ActionContexts</code>
+entry — unless you want to nudge the aim origin, in which case re-declare the vanilla context by its GUID and set a
+<code>Position</code> (this is what <code>UAZ469_seats_rear.et</code> does).</p>
 
-### 4b. additionalActions — the PS_ShootingSeatAction
+<h3>5b. additionalActions — the PS_ShootingSeatAction</h3>
+<p>One per seat. This is the actual drive-by action. Each action <strong>and every PointInfo inside it needs its own
+unique instance GUID.</strong> This block is copied verbatim from the working <code>UAZ469_base.et</code> — the minimal
+complete Pattern A seat:</p>
 
-One per seat. This is the actual drive-by "Get in" / "Switch seat" action. Each action **and every PointInfo inside it needs its own unique instance GUID.**
-
-```
-PS_ShootingSeatAction "{620F5A9F9335C042}" {
+<pre><code>PS_ShootingSeatAction "{620F5A9F9335C042}" {
  UIInfo SCR_ActionUIInfo "{6208A45F7FD3AE71}" {
   Name "#AR-UserAction_GetIn"
   Icon "{04EF6B438A9F69A1}UI/Textures/UserActions/getinaction.edds"
@@ -136,83 +332,95 @@ PS_ShootingSeatAction "{620F5A9F9335C042}" {
    Angles 0 90 0
   }
  }
-}
-```
+}</code></pre>
 
-That block is copied verbatim from your working `UAZ469_base.et` — it's the minimal complete Pattern A seat.
+<hr>
 
----
+<!-- ============ FIELDS ============ -->
+<h2 id="fields">6. Field reference</h2>
 
-## 5. Field reference
+<h3>PS_ShootingSeatAction</h3>
+<table>
+  <tr><th>Field</th><th>Meaning</th></tr>
+  <tr><td><code>UIInfo … Name</code></td><td><code>#AR-UserAction_GetIn</code> shows as "Get in"; the script auto-swaps it to "Switch seat" + "Gunner" when you're already in the vehicle.</td></tr>
+  <tr><td><code>ParentContextList</code></td><td>The context this action attaches to. <strong>Pattern A:</strong> the vanilla seat's context name (lowercase in the examples, e.g. <code>"passenger_r01"</code>). <strong>Pattern B:</strong> the <code>ContextName</code> you defined. Must match exactly, casing included.</td></tr>
+  <tr><td><code>Duration</code></td><td>Action hold time (0.5 everywhere).</td></tr>
+  <tr><td><code>CanAggregate</code></td><td>Leave <code>1</code>.</td></tr>
+  <tr><td><code>m_EntitySlotInfo</code></td><td>The seat definition — see below.</td></tr>
+</table>
 
-### PS_ShootingSeatAction
+<h3>PS_EntitySlotInfoSeat</h3>
+<table>
+  <tr><th>Field</th><th>Meaning</th></tr>
+  <tr><td><code>PivotID</code></td><td>Bone/pivot to anchor to. Set for Pattern A (ride the vanilla pose, e.g. <code>codriver_idle</code>). <strong>Omit</strong> for Pattern B so offsets are vehicle-relative.</td></tr>
+  <tr><td><code>Offset</code></td><td>X Y Z seat position relative to the pivot (or vehicle, if no pivot).</td></tr>
+  <tr><td><code>Angles</code></td><td>Facing, <code>pitch yaw roll</code>. Turn a bench gunner outward (M998 rear uses <code>0 -122 0</code> / <code>0 20 0</code>).</td></tr>
+  <tr><td><code>m_iShootSeatId</code></td><td><strong>Pattern A:</strong> must equal the <code>m_iShootSeatId_PS</code> on the matching slot. <strong>Pattern B:</strong> omit (defaults to 0 = standalone).</td></tr>
+  <tr><td><code>m_bAllowBigWeapon</code></td><td><code>1</code> = allow launchers / big weapons. <code>0</code>/omit = rifles &amp; pistols only (a launcher is force-unequipped and can't fire). Set <code>1</code> for gunner seats.</td></tr>
+  <tr><td><code>m_LeftLegPointInfo</code> / <code>m_RightLegPointInfo</code></td><td>Leg IK placement (own PointInfo + GUID each).</td></tr>
+  <tr><td><code>m_ExitPointInfo</code></td><td>Where you're dropped on exit — own <code>Offset</code> + <code>Angles</code>. The script floor-clamps this, so approximate is fine.</td></tr>
+</table>
+<p>Other attributes exist (<code>m_fFallAcceleration</code> = collision-damage eject threshold, <code>m_fBendMultiplier</code>, <code>m_fRotationClamp</code>, <code>m_fFallAngle</code>) with sensible defaults; leave them unless tuning.</p>
 
-| Field | Meaning |
-|---|---|
-| `UIInfo … Name` | Prompt text. `#AR-UserAction_GetIn` shows as "Get in"; the script auto-swaps it to "Switch seat" + "Gunner" when you're already in the vehicle. |
-| `ParentContextList` | The context this action attaches to. **Pattern A:** the vanilla seat's context name (lowercase in the examples, e.g. `"passenger_r01"`). **Pattern B:** the `ContextName` you defined in 4a (e.g. `"Passenger_r3"`). Must match exactly, casing included. |
-| `Duration` | Action hold time (0.5 in all examples). |
-| `CanAggregate` | Leave `1`. |
-| `m_EntitySlotInfo` | The seat definition — see below. |
+<hr>
 
-### PS_EntitySlotInfoSeat
+<!-- ============ ID RULE ============ -->
+<h2 id="idrule">7. The ID-matching rule (Pattern A)</h2>
+<p>This pairing must be exact, or the seat won't link to its compartment:</p>
+<pre><code>Compartment slot   CargoCompartmentSlot Passenger_r01 { m_iShootSeatId_PS 1 }
+                                                                          |  (equal &amp; unique)
+Action seat        m_EntitySlotInfo ... { m_iShootSeatId 1 }  &lt;-----------+</code></pre>
+<p>Every Pattern A seat is one slot entry (Component 1) + one action (Component 2) sharing the same ID. Pattern B seats
+have neither — just an action with its own context.</p>
 
-| Field | Meaning |
-|---|---|
-| `PivotID` | Bone/pivot to anchor to. Set it for Pattern A (ride the vanilla pose, e.g. `codriver_idle`, `passenger_01_idle`). **Omit** for Pattern B so offsets are vehicle-relative. |
-| `Offset` | X Y Z seat position relative to the pivot (or vehicle, if no pivot). |
-| `Angles` | Facing, `pitch yaw roll`. Use it to turn a bench gunner outward (e.g. M998 rear uses `0 -122 0` / `0 20 0`). |
-| `m_iShootSeatId` | **Pattern A:** must equal the `m_iShootSeatId_PS` on the matching compartment slot. **Pattern B:** omit (defaults to 0 = standalone). |
-| `m_bAllowBigWeapon` | `1` = allow launchers / big weapons in this seat. `0`/omit = rifles & pistols only (a launcher gets force-unequipped and can't fire). Set `1` for gunner seats. |
-| `m_LeftLegPointInfo` / `m_RightLegPointInfo` | Leg IK placement (own PointInfo + GUID each). |
-| `m_ExitPointInfo` | Where you're dropped on exit — its own `Offset` + `Angles`. The script also floor-clamps this, so approximate is fine. |
+<hr>
 
-Other `PS_EntitySlotInfoSeat` attributes exist (`m_fFallAcceleration` = collision-damage eject threshold, `m_fBendMultiplier`, `m_fRotationClamp`, `m_fFallAngle`) with sensible defaults; leave them unless tuning.
+<!-- ============ FIRING ============ -->
+<h2 id="firing">8. Firing rules (why a seat might not shoot)</h2>
+<p>The seat manager manages your fire input each frame:</p>
+<ul>
+  <li><strong>Big weapons:</strong> a rocket launcher is blocked (and unequipped) unless <code>m_bAllowBigWeapon 1</code>. Machine guns, rifles and pistols fire normally.</li>
+  <li><strong>Grenades / mines:</strong> always blocked from being thrown/fired while seated.</li>
+  <li><strong>Weapon obstruction:</strong> if the muzzle traces into the vehicle's fire-geometry, fire is cut and the weapon lowered. If a new seat "raises but won't shoot," rotate/offset it so the muzzle clears the body.</li>
+  <li><strong>Rotation clamp:</strong> aim is clamped ~120° off the seat's forward. Face the seat the way you expect to shoot.</li>
+</ul>
 
----
+<hr>
 
-## 6. The ID-matching rule (Pattern A)
+<!-- ============ CHECKLIST ============ -->
+<h2 id="checklist">9. Per-vehicle checklist</h2>
+<ol>
+  <li>Create the inherited override in Workbench (Section 3).</li>
+  <li>Get the vanilla <strong>slot names</strong> and the instance <strong>GUIDs</strong> of both components from the vanilla prefab.</li>
+  <li>Re-declare both components by those GUIDs — <strong>do not create new ones.</strong></li>
+  <li><span class="pill">Pattern A</span> per existing seat: add <code>CargoCompartmentSlot … { m_iShootSeatId_PS N }</code> + a matching <code>PS_ShootingSeatAction</code> with <code>m_iShootSeatId N</code>, pointing <code>ParentContextList</code> at the vanilla context.</li>
+  <li><span class="pill">Pattern B</span> per new position: add a <code>UserActionContext</code> (new GUID + <code>ContextName</code> + <code>Position</code>) + a <code>PS_ShootingSeatAction</code> pointing at that <code>ContextName</code>, no shoot-seat ID.</li>
+  <li>Give every new action and PointInfo a <strong>unique instance GUID</strong>.</li>
+  <li>Set <code>m_bAllowBigWeapon 1</code> on any gunner/heavy-weapon seat.</li>
+  <li>Load in Workbench; tune <code>Offset</code> / <code>Angles</code> / leg / exit numbers until the pose sits right and the muzzle clears the body.</li>
+</ol>
 
-This is the pairing that must be exact, or the seat won't link to its compartment:
+<hr>
 
-```
-Compartment slot   CargoCompartmentSlot Passenger_r01 { m_iShootSeatId_PS 1 }
-                                                                          │  (must be equal & unique)
-Action seat        m_EntitySlotInfo … { m_iShootSeatId 1 }  ◄─────────────┘
-```
+<!-- ============ PITFALLS ============ -->
+<h2 id="pitfalls">10. Pitfalls (learned the hard way)</h2>
+<div class="callout warn">
+  <span class="lbl">Never duplicate a component</span>
+  Do not add a second <code>ActionsManagerComponent</code> or <code>SCR_BaseCompartmentManagerComponent</code>. Reuse the
+  inherited GUIDs — a duplicate wipes the vanilla passenger seats.
+</div>
+<ul>
+  <li>The <code>.meta</code> must carry the correct resource GUID or the override won't apply — let Workbench generate it.</li>
+  <li>Duplicate/placeholder GUIDs on actions or PointInfos cause silent breakage; each must be unique.</li>
+  <li>A truncated or brace-unbalanced script <em>anywhere</em> fails the whole addon's script module (no drive-by, no logs).</li>
+  <li>Don't hijack the character command handler with a no-op scripted command to stop falling — it also freezes aiming and firing. Drive the pose with the <code>SeatOnVehicle</code> animation variable and leave the normal command running.</li>
+  <li>OneDrive can serve stale partial copies of files to external tools — verify in Workbench if a file looks cut-off.</li>
+</ul>
 
-Every Pattern A seat is one slot entry (Component 1) + one action (Component 2) sharing the same ID. Pattern B seats have neither — just an action with its own context.
+<footer>
+  SHS Drive By — Vehicle Setup Guide &middot; Shadow Haven Hosting
+</footer>
 
----
-
-## 7. Firing rules (why a seat might not shoot)
-
-The seat manager actively manages your fire input each frame:
-
-- **Big weapons:** a rocket launcher is blocked (and unequipped) unless `m_bAllowBigWeapon 1`. Machine guns, rifles, pistols fire normally.
-- **Grenades / mines:** always blocked from being thrown/fired while seated.
-- **Weapon obstruction:** if the muzzle traces into the vehicle's fire-geometry, fire is cut and the weapon lowered. If a new seat "raises but won't shoot," rotate/offset it so the muzzle clears the body, or lean the aim outward.
-- **Rotation clamp:** aim is clamped ~120° off the seat's forward; past that, look input is pushed back. Face the seat the way you expect to shoot.
-
----
-
-## 8. Per-vehicle checklist
-
-1. Create the inherited override in Workbench (Section 2).
-2. Get the vanilla **slot names** and the instance **GUIDs** of `SCR_BaseCompartmentManagerComponent` and `ActionsManagerComponent` from the vanilla prefab.
-3. Re-declare both components by those GUIDs — **do not create new ones.**
-4. For each existing seat you want (Pattern A): add a `CargoCompartmentSlot … { m_iShootSeatId_PS N }` and a matching `PS_ShootingSeatAction` with `m_iShootSeatId N`, pointing `ParentContextList` at the vanilla context.
-5. For each new position (Pattern B): add a `UserActionContext` (new GUID + `ContextName` + `Position`) and a `PS_ShootingSeatAction` pointing at that `ContextName`, no shoot-seat ID.
-6. Give every new action and PointInfo a **unique instance GUID**.
-7. Set `m_bAllowBigWeapon 1` on any gunner/heavy-weapon seat.
-8. Load in Workbench; tune `Offset` / `Angles` / leg / exit numbers until the pose sits right and the muzzle clears the body.
-
----
-
-## 9. Pitfalls (learned the hard way)
-
-- **Never add a second `ActionsManagerComponent` or `SCR_BaseCompartmentManagerComponent`.** Reuse the inherited GUIDs. A duplicate wipes the vanilla passenger seats.
-- **The `.meta` must carry the correct resource GUID** or the override won't apply — let Workbench generate it.
-- **Duplicate/placeholder GUIDs** on actions or PointInfos cause silent breakage; each must be unique.
-- **A truncated or unbalanced script anywhere** fails the whole addon's script module (no drive-by at all, no logs). Keep braces balanced.
-- **OneDrive note:** this addon lives in a OneDrive folder. If a tool ever shows a file as cut-off, re-check it directly in Workbench/the editor — OneDrive can serve stale partial copies.
+</div>
+</body>
+</html>
