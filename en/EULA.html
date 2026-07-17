@@ -2,509 +2,989 @@
 title: EULA
 description: 
 published: true
-date: 2026-06-19T04:55:05.362Z
+date: 2026-07-17T04:08:32.807Z
 tags: 
 editor: code
 dateCreated: 2026-06-19T04:55:05.362Z
 -->
 
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shadow Haven Studios / Shadow Haven Hosting EULA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shadow Haven™ — End User License Agreement</title>
+<style>
+    :root{
+        --bg:#0a0e17;
+        --bg-2:#0d1220;
+        --surface:rgba(30,41,59,.55);
+        --surface-solid:#141b2b;
+        --sunken:rgba(9,13,22,.55);
+        --border:rgba(148,163,184,.14);
+        --border-strong:rgba(148,163,184,.3);
+        --text:#e6e9f0;
+        --text-2:#aab2c5;
+        --text-3:#7c869c;
+        --accent:#6366f1;
+        --accent-2:#22d3ee;
+        --grad:linear-gradient(135deg,#6366f1 0%,#4f46e5 45%,#22d3ee 150%);
+        --grad-soft:linear-gradient(135deg,rgba(99,102,241,.16),rgba(34,211,238,.12));
+        --green:#34d399;
+        --red:#fb7185;
+        --radius:16px;
+        --maxw:1180px;
+    }
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;scroll-padding-top:24px;}
+    body{
+        margin:0;
+        font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+        color:var(--text);
+        background:
+            radial-gradient(1200px 600px at 12% -8%,rgba(99,102,241,.16),transparent 55%),
+            radial-gradient(1000px 600px at 100% 0%,rgba(34,211,238,.10),transparent 50%),
+            var(--bg);
+        line-height:1.65;
+        -webkit-font-smoothing:antialiased;
+        font-size:16px;
+    }
+    a{color:var(--accent-2);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    ::selection{background:rgba(99,102,241,.35);color:#fff;}
 
-  <style>
-    :root {
-      --bg: #0f1117;
-      --panel: #171a23;
-      --panel-2: #1f2430;
-      --text: #e7eaf0;
-      --muted: #aab1c2;
-      --accent: #6cb6ff;
-      --danger: #ff6b6b;
-      --border: #2d3444;
+    /* Scrollbars */
+    *::-webkit-scrollbar{width:10px;height:10px;}
+    *::-webkit-scrollbar-thumb{background:rgba(99,102,241,.35);border-radius:10px;border:2px solid transparent;background-clip:padding-box;}
+    *::-webkit-scrollbar-thumb:hover{background:rgba(99,102,241,.55);background-clip:padding-box;}
+    *::-webkit-scrollbar-track{background:transparent;}
+
+    /* ---------- Hero ---------- */
+    .hero{
+        position:relative;
+        overflow:hidden;
+        border-bottom:1px solid var(--border);
+        background:linear-gradient(180deg,rgba(20,27,43,.7),rgba(10,14,23,.2));
+    }
+    .hero-inner{
+        max-width:var(--maxw);
+        margin:0 auto;
+        padding:56px 28px 44px;
+        display:flex;
+        flex-direction:column;
+        gap:22px;
+    }
+    .brand{display:flex;align-items:center;gap:16px;}
+    .brand-badge{
+        width:58px;height:58px;flex:0 0 58px;
+        border-radius:16px;
+        background:var(--grad);
+        display:flex;align-items:center;justify-content:center;
+        font-weight:800;font-size:22px;letter-spacing:.5px;color:#fff;
+        box-shadow:0 10px 30px -12px rgba(79,70,229,.7),inset 0 1px 0 rgba(255,255,255,.25);
+    }
+    .brand-name{font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);}
+    .brand-sub{font-size:13px;color:var(--text-3);margin-top:2px;}
+    h1.title{
+        margin:0;
+        font-size:clamp(30px,5vw,46px);
+        line-height:1.1;
+        font-weight:800;
+        letter-spacing:-.01em;
+        background:linear-gradient(120deg,#fff 20%,#c7d2fe 60%,#67e8f9 100%);
+        -webkit-background-clip:text;background-clip:text;
+        -webkit-text-fill-color:transparent;
+    }
+    .subtitle{font-size:17px;color:var(--text-2);max-width:60ch;margin:0;}
+    .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px;}
+    .chip{
+        display:inline-flex;align-items:center;gap:8px;
+        padding:7px 14px;border-radius:999px;
+        background:var(--sunken);border:1px solid var(--border);
+        font-size:13px;color:var(--text-2);
+    }
+    .chip b{color:var(--text);font-weight:600;}
+    .chip .dot{width:8px;height:8px;border-radius:50%;background:var(--grad);}
+
+    /* ---------- Layout ---------- */
+    .wrap{
+        max-width:var(--maxw);
+        margin:0 auto;
+        padding:36px 28px 80px;
+        display:grid;
+        grid-template-columns:280px minmax(0,1fr);
+        gap:40px;
+        align-items:start;
+    }
+    /* TOC */
+    .toc{
+        position:sticky;top:24px;
+        max-height:calc(100vh - 48px);
+        overflow:auto;
+        padding:18px;
+        border-radius:var(--radius);
+        background:var(--surface);
+        border:1px solid var(--border);
+        backdrop-filter:blur(12px);
+        -webkit-backdrop-filter:blur(12px);
+    }
+    .toc h2{
+        margin:2px 0 12px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);font-weight:700;
+    }
+    .toc a{
+        display:block;color:var(--text-2);text-decoration:none;
+        font-size:13.5px;line-height:1.4;
+        padding:6px 10px;border-radius:9px;border-left:2px solid transparent;
+        transition:background .15s,color .15s,border-color .15s;
+    }
+    .toc a:hover{background:rgba(148,163,184,.08);color:var(--text);}
+    .toc a.active{
+        color:#fff;background:var(--grad-soft);border-left-color:var(--accent-2);font-weight:600;
+    }
+    .toc a .num{color:var(--text-3);font-variant-numeric:tabular-nums;margin-right:7px;}
+    .toc a.active .num{color:var(--accent-2);}
+    .toc .toc-sep{height:1px;background:var(--border);margin:10px 4px;}
+
+    /* Content */
+    .content{min-width:0;}
+    .card{
+        background:var(--surface);
+        border:1px solid var(--border);
+        border-radius:var(--radius);
+        backdrop-filter:blur(12px);
+        -webkit-backdrop-filter:blur(12px);
+        box-shadow:0 1px 2px rgba(0,0,0,.25),0 20px 40px -30px rgba(0,0,0,.9);
+    }
+    .welcome{padding:30px 32px;margin-bottom:34px;}
+    .welcome .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2);font-weight:700;margin-bottom:10px;}
+    .welcome h2{margin:0 0 12px;font-size:24px;font-weight:700;}
+    .welcome p{color:var(--text-2);margin:0 0 14px;}
+    .idea{
+        margin-top:18px;padding:18px 20px;border-radius:12px;
+        background:var(--sunken);border:1px solid var(--border);
+    }
+    .idea .idea-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);font-weight:700;margin-bottom:10px;}
+    .idea ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px;}
+    .idea li{position:relative;padding-left:26px;color:var(--text);font-size:14.5px;}
+    .idea li::before{content:"";position:absolute;left:2px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--grad);}
+
+    section.sec{scroll-margin-top:24px;padding:8px 2px 26px;border-bottom:1px solid var(--border);margin-bottom:26px;}
+    section.sec:last-of-type{border-bottom:none;}
+    .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+    .sec-num{
+        flex:0 0 40px;width:40px;height:40px;border-radius:12px;
+        display:flex;align-items:center;justify-content:center;
+        font-weight:700;font-size:16px;color:#fff;
+        background:var(--grad-soft);border:1px solid var(--border-strong);
+    }
+    .sec-head h3{margin:0;font-size:21px;font-weight:700;letter-spacing:-.01em;line-height:1.25;}
+    .sec p{color:var(--text-2);margin:0 0 12px;}
+    .sec p:last-child{margin-bottom:0;}
+    .sec strong{color:var(--text);font-weight:600;}
+    .sec ul{margin:6px 0 14px;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+    .sec ul li{position:relative;padding-left:24px;color:var(--text-2);}
+    .sec ul li::before{content:"";position:absolute;left:3px;top:10px;width:7px;height:7px;border-radius:2px;background:var(--accent);transform:rotate(45deg);}
+    .sec ol{margin:6px 0 14px;padding-left:22px;color:var(--text-2);}
+    .sec ol li{margin-bottom:8px;padding-left:4px;}
+    .sec ol li::marker{color:var(--accent-2);font-weight:600;}
+    .quote{
+        margin:4px 0 14px;padding:12px 18px;border-left:3px solid var(--accent);border-radius:0 10px 10px 0;
+        background:var(--sunken);color:var(--text);font-style:italic;
+    }
+    .placeholder{
+        color:var(--accent-2);background:rgba(34,211,238,.1);
+        padding:1px 8px;border-radius:6px;border:1px dashed rgba(34,211,238,.4);
+        font-style:normal;font-size:.92em;
+    }
+    .note{color:var(--text-3);font-size:14px;}
+
+    /* Summary split */
+    .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:6px;}
+    .col{padding:20px 22px;border-radius:14px;}
+    .col.may{background:linear-gradient(180deg,rgba(52,211,153,.08),rgba(52,211,153,.02));border:1px solid rgba(52,211,153,.28);}
+    .col.maynot{background:linear-gradient(180deg,rgba(251,113,133,.08),rgba(251,113,133,.02));border:1px solid rgba(251,113,133,.28);}
+    .col h4{margin:0 0 14px;font-size:15px;display:flex;align-items:center;gap:9px;font-weight:700;}
+    .col.may h4{color:var(--green);}
+    .col.maynot h4{color:var(--red);}
+    .col ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px;}
+    .col li{position:relative;padding-left:26px;font-size:14.5px;color:var(--text-2);}
+    .col.may li::before{content:"\2713";position:absolute;left:2px;top:0;color:var(--green);font-weight:700;}
+    .col.maynot li::before{content:"\2715";position:absolute;left:2px;top:0;color:var(--red);font-weight:700;}
+    .icon-badge{width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;}
+    .col.may .icon-badge{background:rgba(52,211,153,.15);}
+    .col.maynot .icon-badge{background:rgba(251,113,133,.15);}
+
+    .intent{padding:28px 32px;margin-top:34px;background:var(--grad-soft);border:1px solid var(--border-strong);}
+    .intent h3{margin:0 0 12px;font-size:20px;font-weight:700;}
+    .intent p{color:var(--text);margin:0 0 12px;}
+    .intent p:last-child{margin-bottom:0;}
+
+    .contact{
+        display:flex;flex-wrap:wrap;gap:14px;margin:8px 0 4px;
+    }
+    .contact a{
+        display:inline-flex;align-items:center;gap:10px;
+        padding:12px 18px;border-radius:12px;
+        background:var(--sunken);border:1px solid var(--border);color:var(--text);
+        font-weight:600;transition:border-color .15s,transform .15s;
+    }
+    .contact a:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none;}
+    .contact a span.k{color:var(--text-3);font-weight:500;font-size:13px;}
+
+    footer.doc-foot{
+        max-width:var(--maxw);margin:0 auto;padding:26px 28px 60px;
+        color:var(--text-3);font-size:13px;text-align:center;
+    }
+    footer.doc-foot .tm{color:var(--text-2);}
+
+    /* Mobile TOC toggle */
+    .toc-toggle{display:none;}
+
+    @media (max-width:920px){
+        .wrap{grid-template-columns:1fr;gap:20px;}
+        .toc{position:static;max-height:none;}
+        .toc-body{display:none;}
+        .toc.open .toc-body{display:block;}
+        .toc-toggle{
+            display:flex;align-items:center;justify-content:space-between;width:100%;
+            background:none;border:none;color:var(--text);font:inherit;cursor:pointer;font-weight:700;font-size:14px;letter-spacing:.05em;
+        }
+        .toc-toggle .caret{transition:transform .2s;color:var(--text-3);}
+        .toc.open .toc-toggle .caret{transform:rotate(180deg);}
+        .summary-grid{grid-template-columns:1fr;}
+    }
+    @media (max-width:560px){
+        .hero-inner{padding:40px 20px 34px;}
+        .wrap{padding:24px 18px 60px;}
+        .welcome{padding:24px 20px;}
+        .intent{padding:24px 20px;}
+        .sec-head h3{font-size:19px;}
     }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.65;
+    /* Print */
+    @media print{
+        body{background:#fff;color:#111;}
+        .toc,.toc-toggle,.hero{background:#fff;}
+        .brand-badge{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+        .wrap{display:block;padding:0;}
+        .card,.sec{box-shadow:none;border-color:#ddd;background:#fff;}
+        h1.title{-webkit-text-fill-color:#111;color:#111;}
+        a{color:#1d4ed8;}
+        section.sec{break-inside:avoid;}
     }
-
-    .page {
-      max-width: 1050px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, var(--panel), var(--panel-2));
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 34px;
-      margin-bottom: 32px;
-    }
-
-    .hero h1 {
-      margin: 0 0 8px;
-      font-size: 2.3rem;
-      letter-spacing: 0.02em;
-    }
-
-    .hero h2 {
-      margin: 0;
-      color: var(--muted);
-      font-weight: 400;
-      font-size: 1.2rem;
-    }
-
-    .meta {
-      margin-top: 22px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .section {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
-      margin-bottom: 24px;
-    }
-
-    h2 {
-      color: var(--accent);
-      margin-top: 0;
-      font-size: 1.5rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
-    }
-
-    h3 {
-      color: var(--text);
-      margin-top: 26px;
-      font-size: 1.15rem;
-    }
-
-    p {
-      margin: 12px 0;
-    }
-
-    ul {
-      padding-left: 24px;
-      margin-top: 10px;
-    }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    .warning {
-      border-left: 4px solid var(--danger);
-      background: rgba(255, 107, 107, 0.08);
-      padding: 16px 18px;
-      border-radius: 8px;
-      margin: 18px 0;
-    }
-
-    .notice {
-      border-left: 4px solid var(--accent);
-      background: rgba(108, 182, 255, 0.08);
-      padding: 16px 18px;
-      border-radius: 8px;
-      margin: 18px 0;
-    }
-
-    .uppercase {
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .footer {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 34px;
-      text-align: center;
-    }
-  </style>
+</style>
 </head>
-
 <body>
-  <main class="page">
-    <header class="hero">
-      <h1>EULA</h1>
-      <h2>Shadow Haven™ Studios / Shadow Haven™ Hosting End User License Agreement</h2>
-
-      <div class="meta">
-        <strong>Effective:</strong> April 2026<br />
-        <strong>Owner:</strong> Shadow Haven Studios LLC &amp; Shadow Haven Hosting LLC
-      </div>
-    </header>
-
-    <section class="section">
-      <h2>Disclaimer and License</h2>
-
-      <div class="warning">
-        <p class="uppercase">
-          All computer programs, software, scripts, systems, configurations, models, textures,
-          materials, and associated assets are provided “as is” without warranty of any kind.
-        </p>
-
-        <p>
-          Shadow Haven™ Studios and Shadow Haven™ Hosting make no warranties, express or implied,
-          that the content is free of errors, compatible with any particular system, suitable for
-          any specific purpose, or consistent with any particular standard of merchantability.
-        </p>
-
-        <p>
-          This content should not be relied upon for any purpose where failure, malfunction, or
-          incorrect operation could result in injury, loss of property, loss of data, server
-          instability, or other damages. Use of this content is at your own risk.
-        </p>
-
-        <p>
-          The author, publisher, Shadow Haven™ Studios, and Shadow Haven™ Hosting disclaim all
-          liability for direct, indirect, incidental, consequential, or special damages resulting
-          from use, misuse, modification, or redistribution of this content.
-        </p>
-      </div>
-
-      <p>
-        By downloading, installing, loading, accessing, hosting, modifying, referencing, or using
-        any Shadow Haven™ Studios or Shadow Haven™ Hosting content, you agree to this End User
-        License Agreement.
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>End User License Agreement</h2>
-
-      <p>
-        This content is the sole property of Shadow Haven™ Studios and/or Shadow Haven™ Hosting,
-        registered United States business entities.
-      </p>
-
-      <p>
-        “Shadow Haven™” is a protected mark. The names “Shadow Haven™ Studios,” “Shadow Haven™
-        Hosting,” “SHS,” and “SHH,” along with all associated branding, logos, identifiers,
-        project names, and related marks, are protected and may not be used without explicit
-        written authorization.
-      </p>
-
-      <p>All models, textures, materials, scripts, systems, configurations, and associated assets are either:</p>
-
-      <ul>
-        <li>Original works created by Shadow Haven™ Studios and/or Shadow Haven™ Hosting; or</li>
-        <li>Properly licensed under legal agreements.</li>
-      </ul>
-
-      <p>
-        This content is provided strictly for non-commercial use within Bohemia Interactive’s
-        Arma Reforger platform unless written permission is granted by Shadow Haven™ Studios
-        and/or Shadow Haven™ Hosting.
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>No Monetization</h2>
-
-      <p>
-        Shadow Haven™ Studios and Shadow Haven™ Hosting maintain a strict no-monetization policy
-        for third-party use of SHS / SHH content unless explicit written permission has been granted.
-      </p>
-
-      <p>You may not use this content in connection with:</p>
-
-      <ul>
-        <li>Paid or monetized servers;</li>
-        <li>Subscription-based communities;</li>
-        <li>Donation-gated access environments;</li>
-        <li>Paid priority access or queue systems;</li>
-        <li>Paid access to specific in-game content, equipment, cosmetics, factions, roles, or perks;</li>
-        <li>Revenue-generating services or commercial hosting packages using SHS / SHH content;</li>
-        <li>Any other direct or indirect monetization scheme involving SHS / SHH content.</li>
-      </ul>
-
-      <div class="notice">
-        <p>
-          Approval of a monetization scheme by Bohemia Interactive, a server provider, or any
-          third-party platform does not override this EULA or grant permission to monetize
-          Shadow Haven™ Studios or Shadow Haven™ Hosting content.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>No Redistribution / Reupload</h2>
-
-      <p>You may not do any of the following without prior written authorization:</p>
-
-      <ul>
-        <li>Reupload SHS / SHH content;</li>
-        <li>Mirror SHS / SHH content;</li>
-        <li>Repack SHS / SHH content;</li>
-        <li>Redistribute SHS / SHH content;</li>
-        <li>Bundle SHS / SHH assets into another mod, package, server pack, or distribution;</li>
-        <li>Upload SHS / SHH content to any platform outside approved official distribution channels.</li>
-      </ul>
-
-      <p>
-        The only authorized distribution of SHS / SHH content is through official channels
-        approved by Shadow Haven™ Studios and/or Shadow Haven™ Hosting.
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>Trademark and Branding Protection</h2>
-
-      <p>
-        “Shadow Haven™” and associated names, branding, logos, and identifiers are protected.
-      </p>
-
-      <p>You may not:</p>
-
-      <ul>
-        <li>Use “Shadow Haven™,” “Shadow Haven Studios,” “Shadow Haven Hosting,” “SHS,” or “SHH” in project names, server names, mod names, branding, or promotional material;</li>
-        <li>Present derivative work as official SHS / SHH content;</li>
-        <li>Imply partnership, endorsement, sponsorship, approval, or affiliation;</li>
-        <li>Use SHS / SHH logos, marks, or identifiers without written permission.</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Derivative Content</h2>
-
-      <p>
-        Derivative content refers to any modification, extension, dependency, reskin, configuration,
-        system, framework, or project that is based on, references, modifies, or depends on SHS / SHH content.
-      </p>
-
-      <p>
-        Shadow Haven™ Studios may tolerate limited derivative visual work, such as reskins, only
-        when all required conditions are followed.
-      </p>
-
-      <h3>Permitted Reskins and Visual Modifications</h3>
-
-      <p>Reskins and visual derivative work are permitted only if all of the following conditions are met:</p>
-
-      <ul>
-        <li>The project requires the original SHS mod as a dependency;</li>
-        <li>No SHS / SHH assets are bundled, extracted, repacked, or redistributed;</li>
-        <li>Clear and visible credit is provided to Shadow Haven™ Studios;</li>
-        <li>No raw asset extraction is performed, including extraction of textures, models, materials, or protected files;</li>
-        <li>Only screenshot-based or reference-based editing is used;</li>
-        <li>No protected internal files, systems, scripts, or configurations are included in the derivative project;</li>
-        <li>The derivative work does not present itself as official SHS / SHH content.</li>
-      </ul>
-
-      <div class="warning">
-        <p>
-          Permission to create limited visual derivative work does not grant permission to extract,
-          copy, redistribute, reverse engineer, or modify protected SHS / SHH files or systems.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>No Extraction / Reverse Engineering</h2>
-
-      <p>You may not:</p>
-
-      <ul>
-        <li>Extract SHS / SHH assets;</li>
-        <li>Decompile SHS / SHH files;</li>
-        <li>Reverse engineer SHS / SHH systems;</li>
-        <li>Access protected or internal content;</li>
-        <li>Bypass intended dependency structures;</li>
-        <li>Use extracted content as a base for another project.</li>
-      </ul>
-
-      <p>
-        This applies specifically to Shadow Haven™ Studios and Shadow Haven™ Hosting intellectual
-        property and does not override ownership of engine systems by Bohemia Interactive or any
-        other lawful rights holder.
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>Code, Systems, and Infrastructure Protection</h2>
-
-      <p>
-        All scripting, backend systems, configurations, modular frameworks, routing logic,
-        infrastructure systems, and related technical implementations developed by SHS / SHH
-        are proprietary unless explicitly stated otherwise in writing.
-      </p>
-
-      <p>You may not:</p>
-
-      <ul>
-        <li>Copy or reuse SHS / SHH code;</li>
-        <li>Modify SHS / SHH core systems;</li>
-        <li>Use SHS / SHH systems as the base for derivative frameworks;</li>
-        <li>Recreate proprietary SHS / SHH systems through direct copying, decompilation, or unauthorized reverse engineering;</li>
-        <li>Use AI, automation, or code transformation tools to disguise copied SHS / SHH code or systems.</li>
-      </ul>
-
-      <div class="notice">
-        <p>
-          Studying general modding concepts, engine behavior, or public documentation does not grant
-          permission to copy SHS / SHH proprietary implementation, structure, code, or protected systems.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Hosting and Service Enforcement</h2>
-
-      <p>
-        Shadow Haven™ Hosting retains authority to enforce this license across hosted services,
-        managed servers, community servers, and any environment where SHS / SHH content is used.
-      </p>
-
-      <p>Shadow Haven™ Hosting may:</p>
-
-      <ul>
-        <li>Restrict or deny service to violating users or communities;</li>
-        <li>Refuse hosting services involving unauthorized use of SHS / SHH content;</li>
-        <li>Act against unauthorized monetization involving SHS / SHH content;</li>
-        <li>Require removal of infringing content from hosted servers;</li>
-        <li>Terminate access to SHS / SHH services for license violations.</li>
-      </ul>
-
-      <p>
-        Use of SHS / SHH content on third-party hosting platforms remains subject to this license.
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>Prohibited Uses</h2>
-
-      <p>
-        SHS / SHH content may not be used in any project, server, community, or derivative work that:
-      </p>
-
-      <ul>
-        <li>Promotes terrorism, extremism, hate groups, or unlawful violence;</li>
-        <li>Promotes pornography, nudity, sexual exploitation, or sexually explicit content;</li>
-        <li>Harasses, targets, or defames individuals, communities, developers, or organizations;</li>
-        <li>Misrepresents SHS / SHH content or falsely claims affiliation with SHS / SHH;</li>
-        <li>Damages the image, reputation, or goodwill of Shadow Haven™ Studios or Shadow Haven™ Hosting;</li>
-        <li>Violates Bohemia Interactive platform rules, Workshop rules, applicable law, or this EULA.</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Limitations and Restricted Parties</h2>
-
-      <p>
-        Due to licensing violations, misuse, unauthorized redistribution, misconduct, or other
-        enforcement concerns, Shadow Haven™ Studios and Shadow Haven™ Hosting reserve the right
-        to prohibit specific individuals, groups, communities, servers, organizations, or affiliated
-        persons from using SHS / SHH content.
-      </p>
-
-      <p>
-        Restricted parties may not:
-      </p>
-
-      <ul>
-        <li>Use SHS / SHH content;</li>
-        <li>Create derivative content based on SHS / SHH content;</li>
-        <li>Host SHS / SHH content;</li>
-        <li>Redistribute SHS / SHH content;</li>
-        <li>Monetize, promote, or advertise services using SHS / SHH content.</li>
-      </ul>
-
-      <div class="notice">
-        <p>
-          This list may be updated at any time at the discretion of Shadow Haven™ Studios and/or
-          Shadow Haven™ Hosting.
-        </p>
-      </div>
-
-      <h3>Currently Restricted Parties</h3>
-
-      <ul>
-        <li>No restricted parties publicly listed at this time.</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Enforcement and Legal Action</h2>
-
-      <p>Violations of this EULA may result in:</p>
-
-      <ul>
-        <li>DMCA takedown requests;</li>
-        <li>Platform enforcement through Workshop, Discord, hosting providers, or other services;</li>
-        <li>Server blacklisting;</li>
-        <li>Termination of access to SHS / SHH services;</li>
-        <li>Refusal of future permissions or licensing requests;</li>
-        <li>Legal action under applicable United States intellectual property, copyright, contract, and trademark law.</li>
-      </ul>
-
-      <p>
-        Shadow Haven™ Studios and Shadow Haven™ Hosting reserve the right to enforce this license
-        without prior notice where necessary to protect intellectual property, branding, users,
-        services, or community reputation.
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>Reservation of Rights</h2>
-
-      <p>
-        All rights not explicitly granted under this EULA are fully reserved by Shadow Haven™
-        Studios and Shadow Haven™ Hosting.
-      </p>
-
-      <p>
-        No part of this agreement should be interpreted as a waiver of ownership, copyright,
-        trademark rights, enforcement rights, or any other legal rights held by SHS / SHH.
-      </p>
-    </section>
-
-    <section class="section">
-      <h2>Contact and Permissions</h2>
-
-      <p>
-        For licensing, permissions, commercial use requests, takedown disputes, or other legal
-        inquiries, contact:
-      </p>
-
-      <p>
-        <strong>Email:</strong>
-        <a href="mailto:lucalis@shadowhavenhosting.net">lucalis@shadowhavenhosting.net</a>
-      </p>
-
-      <p>
-        <strong>Discord:</strong>
-        <a href="https://discord.gg/Pr7aH9ppMj" target="_blank" rel="noopener noreferrer">
-          https://discord.gg/Pr7aH9ppMj
-        </a>
-      </p>
-    </section>
-
-    <footer class="footer">
-      Shadow Haven™ Studios / Shadow Haven™ Hosting EULA — Effective April 2026
-    </footer>
-  </main>
+
+<header class="hero">
+    <div class="hero-inner">
+        <div class="brand">
+            <div class="brand-badge">SH</div>
+            <div>
+                <div class="brand-name">Shadow Haven™ Studios / Hosting</div>
+                <div class="brand-sub">Shadow Haven Studios LLC &amp; Shadow Haven Hosting LLC</div>
+            </div>
+        </div>
+        <h1 class="title">Community-Friendly End User License Agreement</h1>
+        <p class="subtitle">The freedoms to build, customize, and extend our work — and the protections that keep the original SHS projects, files, and branding safe.</p>
+        <div class="meta">
+            <span class="chip"><span class="dot"></span>Effective date: <b><span class="placeholder">Insert Effective Date</span></b></span>
+            <span class="chip"><span class="dot"></span>Licensors: <b>SHS &amp; SHH</b></span>
+            <span class="chip"><span class="dot"></span>Platform: <b>Arma Reforger</b></span>
+        </div>
+    </div>
+</header>
+
+<div class="wrap">
+
+    <!-- TABLE OF CONTENTS -->
+    <nav class="toc" id="toc">
+        <button class="toc-toggle" id="tocToggle" aria-expanded="true">
+            <span>Contents</span><span class="caret">▾</span>
+        </button>
+        <div class="toc-body">
+            <h2>Contents</h2>
+            <a href="#welcome"><span class="num">•</span>Welcome</a>
+            <div class="toc-sep"></div>
+            <a href="#s1"><span class="num">1</span>Definitions</a>
+            <a href="#s2"><span class="num">2</span>Ownership</a>
+            <a href="#s3"><span class="num">3</span>Relationship to Bohemia Interactive</a>
+            <a href="#s4"><span class="num">4</span>License Grant</a>
+            <a href="#s5"><span class="num">5</span>Server Customization</a>
+            <a href="#s6"><span class="num">6</span>Community Extensions</a>
+            <a href="#s7"><span class="num">7</span>Official Dependency Requirement</a>
+            <a href="#s8"><span class="num">8</span>Private Modifications</a>
+            <a href="#s9"><span class="num">9</span>Compatibility Patches</a>
+            <a href="#s10"><span class="num">10</span>Reskins &amp; Visual Extensions</a>
+            <a href="#s11"><span class="num">11</span>Attribution</a>
+            <a href="#s12"><span class="num">12</span>Protecting the Original Release</a>
+            <a href="#s13"><span class="num">13</span>No Standalone Replacements</a>
+            <a href="#s14"><span class="num">14</span>Asset Extraction</a>
+            <a href="#s15"><span class="num">15</span>Interoperability &amp; Reverse Engineering</a>
+            <a href="#s16"><span class="num">16</span>Code and Systems</a>
+            <a href="#s17"><span class="num">17</span>AI &amp; Automated Tools</a>
+            <a href="#s18"><span class="num">18</span>Noncommercial &amp; Commercial Use</a>
+            <a href="#s19"><span class="num">19</span>Trademark and Branding</a>
+            <a href="#s20"><span class="num">20</span>Community Conduct</a>
+            <a href="#s21"><span class="num">21</span>Security</a>
+            <a href="#s22"><span class="num">22</span>Permissions &amp; Special Use</a>
+            <a href="#s23"><span class="num">23</span>Restricted Parties</a>
+            <a href="#s24"><span class="num">24</span>Updates and Compatibility</a>
+            <a href="#s25"><span class="num">25</span>Extension Developer Responsibility</a>
+            <a href="#s26"><span class="num">26</span>Feedback and Contributions</a>
+            <a href="#s27"><span class="num">27</span>Friendly Enforcement Approach</a>
+            <a href="#s28"><span class="num">28</span>Disclaimer of Warranties</a>
+            <a href="#s29"><span class="num">29</span>Limitation of Liability</a>
+            <a href="#s30"><span class="num">30</span>Indemnification</a>
+            <a href="#s31"><span class="num">31</span>Term and Termination</a>
+            <a href="#s32"><span class="num">32</span>Changes to This Agreement</a>
+            <a href="#s33"><span class="num">33</span>General Legal Terms</a>
+            <a href="#s34"><span class="num">34</span>Governing Law &amp; Disputes</a>
+            <a href="#s35"><span class="num">35</span>Contact &amp; Permission Requests</a>
+            <div class="toc-sep"></div>
+            <a href="#summary"><span class="num">✦</span>Plain-Language Summary</a>
+            <a href="#intent"><span class="num">✦</span>Our Community Intent</a>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+        <section class="card welcome" id="welcome">
+            <div class="eyebrow">Welcome</div>
+            <h2>Build around our work — with confidence.</h2>
+            <p>Shadow Haven Studios (“SHS”) and Shadow Haven Hosting (“SHH”) create tools, systems, mods, assets, and services for the Arma Reforger community.</p>
+            <p>We want people to enjoy our work, customize it for their communities, and build useful extensions around it. This Agreement is intended to make those freedoms clear while protecting the original SHS projects, files, branding, and development work that make those extensions possible.</p>
+            <div class="idea">
+                <div class="idea-label">The basic idea is simple</div>
+                <ul>
+                    <li>You may use SHS Content, configure it, and build original add-ons that depend on it.</li>
+                    <li>You may make reasonable private changes for your server or development team.</li>
+                    <li>You may publish compatibility patches, integrations, and permitted visual extensions.</li>
+                    <li>You may not reupload, extract, repackage, resell, or present SHS Content as your own.</li>
+                    <li>Public extensions should continue to require the official SHS release as a dependency.</li>
+                    <li>Commercial use requires written permission.</li>
+                </ul>
+            </div>
+            <p style="margin-top:16px;margin-bottom:0;" class="note">Please read the full Agreement below. The plain-language summary is provided for convenience, but the complete terms control.</p>
+        </section>
+
+        <section class="sec" id="s1">
+            <div class="sec-head"><div class="sec-num">1</div><h3>Definitions</h3></div>
+            <p><strong>“SHS”</strong> means Shadow Haven Studios LLC.</p>
+            <p><strong>“SHH”</strong> means Shadow Haven Hosting LLC.</p>
+            <p><strong>“Licensors”</strong> means SHS and SHH, individually or collectively.</p>
+            <p><strong>“SHS Content”</strong> means software, modifications, scripts, systems, configurations, models, textures, materials, documentation, branding, backend implementations, and other content owned, developed, published, or lawfully licensed by SHS or SHH.</p>
+            <p><strong>“Original Content”</strong> means the official, unmodified version of SHS Content distributed through an authorized SHS or SHH channel.</p>
+            <p><strong>“Extension”</strong> means an independently created add-on, compatibility patch, configuration override, integration, script, reskin, or other project designed to work with Original Content.</p>
+            <p><strong>“You”</strong> or <strong>“User”</strong> means any person, server operator, community, developer, organization, or other party that downloads, installs, hosts, modifies, extends, or uses SHS Content.</p>
+            <p>By downloading, installing, hosting, modifying, extending, or otherwise using SHS Content, you agree to this Agreement. If you do not agree, you may not use SHS Content.</p>
+        </section>
+
+        <section class="sec" id="s2">
+            <div class="sec-head"><div class="sec-num">2</div><h3>Ownership</h3></div>
+            <p>SHS Content remains the property of SHS, SHH, their licensors, or other lawful rights holders.</p>
+            <p>This Agreement gives you permission to use SHS Content under the terms below. It does not transfer ownership of SHS Content, its source files, branding, or intellectual-property rights.</p>
+            <p>All rights not expressly granted are reserved.</p>
+        </section>
+
+        <section class="sec" id="s3">
+            <div class="sec-head"><div class="sec-num">3</div><h3>Relationship to Bohemia Interactive</h3></div>
+            <p>SHS Content may be designed for use with Arma Reforger and the Enfusion engine.</p>
+            <p>This Agreement applies only to rights controlled by SHS and SHH. It does not claim ownership of Arma Reforger, the Enfusion engine, Bohemia Interactive software, trademarks, tools, assets, or third-party materials.</p>
+            <p>Your use of Arma Reforger, the Workshop, and Bohemia Interactive materials remains subject to Bohemia Interactive’s applicable terms, licenses, Workshop rules, and monetization requirements.</p>
+            <p>If this Agreement conflicts with a mandatory platform rule, applicable law, or a third-party license governing material not owned by SHS or SHH, that controlling rule applies to the affected material.</p>
+        </section>
+
+        <section class="sec" id="s4">
+            <div class="sec-head"><div class="sec-num">4</div><h3>License Grant</h3></div>
+            <p>As long as you comply with this Agreement, SHS and SHH grant you a limited, revocable, non-exclusive, non-transferable, and non-sublicensable license to:</p>
+            <ul>
+                <li>Download SHS Content from an authorized distribution channel.</li>
+                <li>Install and use SHS Content with Arma Reforger.</li>
+                <li>Host SHS Content on a server.</li>
+                <li>Configure SHS Content for your server or community.</li>
+                <li>Create original Extensions that add to, interact with, or tailor SHS Content.</li>
+                <li>Create permitted visual modifications and reskins.</li>
+                <li>Make private modifications for testing, compatibility, administration, or server operation.</li>
+            </ul>
+            <p>This license does not permit redistribution of SHS Content unless SHS or SHH gives prior written permission.</p>
+        </section>
+
+        <section class="sec" id="s5">
+            <div class="sec-head"><div class="sec-num">5</div><h3>Server Customization</h3></div>
+            <p>We understand that every server and community operates differently. You may customize SHS Content to meet your operational, administrative, or gameplay needs.</p>
+            <p>Permitted customization may include:</p>
+            <ul>
+                <li>Enabling or disabling weapons, equipment, features, or gameplay systems.</li>
+                <li>Changing classifications, categories, tags, values, or configuration settings.</li>
+                <li>Adjusting balance, availability, spawn behavior, inventories, loadouts, or faction access.</li>
+                <li>Creating server-specific rules or restrictions.</li>
+                <li>Adding compatibility with another mod or server system.</li>
+                <li>Creating scripts that interact with public or reasonably accessible SHS interfaces.</li>
+                <li>Creating configuration overrides.</li>
+                <li>Adding original systems that depend on SHS Content.</li>
+                <li>Extending existing SHS functionality.</li>
+                <li>Creating administrative or moderation integrations.</li>
+                <li>Correcting conflicts between SHS Content and another dependency.</li>
+                <li>Making private changes needed to operate SHS Content in your server environment.</li>
+            </ul>
+            <p>You do not need separate written permission for ordinary customization allowed by this section.</p>
+            <p>Customization does not transfer ownership of the underlying SHS Content.</p>
+        </section>
+
+        <section class="sec" id="s6">
+            <div class="sec-head"><div class="sec-num">6</div><h3>Community Extensions</h3></div>
+            <p>We welcome original community projects that work with SHS Content.</p>
+            <p>You may create and publish an Extension when:</p>
+            <ul>
+                <li>The Extension requires the official Original Content as a dependency whenever reasonably possible.</li>
+                <li>The Extension does not include or redistribute protected SHS files.</li>
+                <li>The Extension does not operate as a replacement for the Original Content.</li>
+                <li>Users must still obtain the Original Content through an authorized SHS distribution channel.</li>
+                <li>The Extension does not reproduce a substantial portion of SHS code, assets, or proprietary systems.</li>
+                <li>The Extension does not include extracted SHS models, textures, materials, sounds, animations, scripts, or other protected files.</li>
+                <li>The Extension is clearly presented as an independent community project.</li>
+                <li>The Extension does not claim to be an official SHS or SHH product.</li>
+                <li>The Extension does not imply endorsement, partnership, sponsorship, or approval unless written permission has been granted.</li>
+                <li>The Extension complies with this Agreement, platform rules, and applicable law.</li>
+            </ul>
+            <p>You retain ownership of your original code, assets, configurations, and other original contributions. SHS and SHH retain ownership of the underlying SHS Content.</p>
+            <p>Permission to create an Extension does not permit you to copy, repackage, reupload, or publish a modified version of SHS Content.</p>
+        </section>
+
+        <section class="sec" id="s7">
+            <div class="sec-head"><div class="sec-num">7</div><h3>Official Dependency Requirement</h3></div>
+            <p>A publicly distributed Extension based on SHS Content must use the official SHS Content as a required dependency whenever reasonably possible.</p>
+            <p>The dependency should direct users to an authorized official distribution of the Original Content.</p>
+            <p>You may not intentionally remove, conceal, bypass, or replace the dependency in order to:</p>
+            <ul>
+                <li>Avoid use of the official SHS release.</li>
+                <li>Create an unauthorized independent fork.</li>
+                <li>Distribute SHS functionality as part of another package.</li>
+                <li>Replace Original Content with copied, extracted, or recreated protected files.</li>
+                <li>Divert users to an unauthorized mirror or reupload.</li>
+            </ul>
+            <p>Temporary technical fallback behavior is permitted, but an Extension may not contain copied SHS Content for the purpose of permanently replacing the official dependency.</p>
+        </section>
+
+        <section class="sec" id="s8">
+            <div class="sec-head"><div class="sec-num">8</div><h3>Private Modifications</h3></div>
+            <p>You may privately modify SHS Content for:</p>
+            <ul>
+                <li>Internal development.</li>
+                <li>Local testing.</li>
+                <li>Server administration.</li>
+                <li>Compatibility testing.</li>
+                <li>Debugging.</li>
+                <li>Balance adjustments.</li>
+                <li>Events.</li>
+                <li>Community-specific gameplay.</li>
+                <li>Private server operation.</li>
+            </ul>
+            <p>A private modification may be used on a server operated by you or your community.</p>
+            <p>It may also be shared with developers, administrators, or contractors directly involved in operating that server, provided that:</p>
+            <ul>
+                <li>Access is limited to people who reasonably need it.</li>
+                <li>The files are not made publicly available.</li>
+                <li>The files are not uploaded as a public or unlisted Workshop replacement.</li>
+                <li>The files are not sold, sublicensed, or distributed outside the operating team.</li>
+                <li>Everyone receiving access remains subject to this Agreement.</li>
+            </ul>
+            <p>Private modification does not authorize public redistribution.</p>
+        </section>
+
+        <section class="sec" id="s9">
+            <div class="sec-head"><div class="sec-num">9</div><h3>Compatibility Patches</h3></div>
+            <p>You may create and publish a compatibility patch that helps SHS Content work with another mod, framework, server system, or gameplay environment.</p>
+            <p>A compatibility patch must:</p>
+            <ul>
+                <li>Require the official SHS Content as a dependency.</li>
+                <li>Contain only the patch developer’s original material or lawfully licensed third-party material.</li>
+                <li>Avoid bundling protected SHS Content.</li>
+                <li>Avoid copying substantial SHS code.</li>
+                <li>Use overrides or separate dependencies instead of modified SHS files whenever reasonably possible.</li>
+                <li>Identify any other required dependencies.</li>
+                <li>Avoid implying that SHS guarantees compatibility or provides support for the patch.</li>
+            </ul>
+            <p>When direct modification of an SHS file is technically unavoidable, public distribution of that modified file requires prior written permission.</p>
+        </section>
+
+        <section class="sec" id="s10">
+            <div class="sec-head"><div class="sec-num">10</div><h3>Reskins and Visual Extensions</h3></div>
+            <p>You may create visual Extensions, including reskins, when:</p>
+            <ul>
+                <li>The project requires the Original Content as a dependency.</li>
+                <li>Protected SHS assets are not extracted, bundled, or redistributed.</li>
+                <li>The visual work is created using approved templates, source materials, references, screenshots, or other permitted methods.</li>
+                <li>No raw SHS model, texture, material, or protected source file is included.</li>
+                <li>The project is not presented as official SHS Content.</li>
+                <li>Reasonable attribution is included.</li>
+                <li>The project complies with platform rules and applicable third-party licenses.</li>
+            </ul>
+            <p>This permission does not authorize extraction of protected files from packaged or compiled SHS Content.</p>
+            <p>SHS may provide approved templates or source materials for certain projects. Those materials remain subject to any terms supplied with them.</p>
+        </section>
+
+        <section class="sec" id="s11">
+            <div class="sec-head"><div class="sec-num">11</div><h3>Attribution</h3></div>
+            <p>Public Extensions should include reasonable credit similar to:</p>
+            <div class="quote">“Requires original content by Shadow Haven™ Studios.”</div>
+            <p>Where practical, the project description should also identify and link the official dependency.</p>
+            <p>Attribution does not create or imply a partnership, sponsorship, endorsement, joint ownership, official developer status, or permission to use SHS or SHH branding.</p>
+            <p>An accidental attribution mistake may normally be corrected after notice. Intentional, deceptive, or repeated misrepresentation may be treated as a violation.</p>
+        </section>
+
+        <section class="sec" id="s12">
+            <div class="sec-head"><div class="sec-num">12</div><h3>Protecting the Original SHS Release</h3></div>
+            <p>To protect the official projects and ensure users receive safe, supported, and current versions, you may not do any of the following without prior written permission:</p>
+            <ul>
+                <li>Reupload or mirror SHS Content.</li>
+                <li>Repack or redistribute SHS Content.</li>
+                <li>Publish a modified copy of SHS Content.</li>
+                <li>Bundle SHS Content into another mod or server pack.</li>
+                <li>Upload SHS Content to another Workshop account.</li>
+                <li>Distribute SHS Content through a private launcher, repository, or alternate download.</li>
+                <li>Transfer SHS Content as part of a commercial hosting package.</li>
+                <li>Include extracted SHS files in an Extension.</li>
+                <li>Publish an unauthorized fork.</li>
+            </ul>
+            <p>Linking to the official SHS release or declaring it as a dependency is permitted and encouraged.</p>
+        </section>
+
+        <section class="sec" id="s13">
+            <div class="sec-head"><div class="sec-num">13</div><h3>No Standalone Replacements</h3></div>
+            <p>You may not use SHS Content to create a project that:</p>
+            <ul>
+                <li>Functions as a standalone replacement for an SHS project.</li>
+                <li>Reproduces the essential protected content of an SHS project.</li>
+                <li>Eliminates the need to download the Original Content.</li>
+                <li>Competes with the Original Content using copied or extracted SHS material.</li>
+                <li>Misleads users into believing it is an official or authorized version.</li>
+                <li>Uses copied SHS code, assets, or proprietary implementations as its foundation.</li>
+            </ul>
+            <p>This restriction does not prevent independent development of a project with similar general gameplay ideas, provided protected SHS code, files, assets, expression, and confidential implementation details are not copied.</p>
+        </section>
+
+        <section class="sec" id="s14">
+            <div class="sec-head"><div class="sec-num">14</div><h3>Asset Extraction</h3></div>
+            <p>Unless SHS or SHH gives written permission, you may not:</p>
+            <ul>
+                <li>Extract protected SHS assets from packaged files.</li>
+                <li>Export protected models, textures, materials, animations, sounds, or scripts.</li>
+                <li>Convert protected assets into another format.</li>
+                <li>Obtain source files through unauthorized methods.</li>
+                <li>Circumvent file protections.</li>
+                <li>Publish extracted content.</li>
+                <li>Use extracted content as the basis of another project.</li>
+            </ul>
+            <p>This section does not apply to source materials intentionally released by SHS for customization or extension purposes.</p>
+        </section>
+
+        <section class="sec" id="s15">
+            <div class="sec-head"><div class="sec-num">15</div><h3>Interoperability and Reverse Engineering</h3></div>
+            <p>You may inspect documented interfaces, public configuration structures, dependency behavior, and ordinary runtime interactions to create a permitted Extension or compatibility patch.</p>
+            <p>Except where applicable law expressly provides otherwise, you may not:</p>
+            <ul>
+                <li>Decompile protected SHS binaries.</li>
+                <li>Circumvent technical protections.</li>
+                <li>Recover non-public source code.</li>
+                <li>Obtain protected assets through unauthorized extraction.</li>
+                <li>Reverse engineer confidential backend systems.</li>
+                <li>Use reverse engineering to create an unauthorized replacement or fork.</li>
+                <li>Publish confidential or security-sensitive implementation details.</li>
+            </ul>
+            <p>Nothing in this Agreement is intended to restrict lawful, non-waivable interoperability rights.</p>
+        </section>
+
+        <section class="sec" id="s16">
+            <div class="sec-head"><div class="sec-num">16</div><h3>Code and Systems</h3></div>
+            <p>SHS and SHH scripts, frameworks, backend systems, infrastructure, routing logic, configurations, and technical implementations remain proprietary unless released under a separate license.</p>
+            <p>You may create original code that communicates with, depends on, overrides, configures, or extends SHS Content.</p>
+            <p>You may not:</p>
+            <ul>
+                <li>Copy substantial SHS code into another project.</li>
+                <li>Present SHS code as your own.</li>
+                <li>Remove ownership, copyright, or attribution notices.</li>
+                <li>Redistribute modified SHS source files without permission.</li>
+                <li>Use SHS code as the foundation of an independent competing framework.</li>
+                <li>Sell or sublicense SHS code.</li>
+                <li>Use automated transformation to conceal copied SHS code.</li>
+                <li>Rename, translate, obfuscate, or restructure copied code to avoid detection or attribution.</li>
+            </ul>
+            <p>Studying public engine documentation, observable behavior, common modding techniques, and general programming concepts is permitted.</p>
+            <p>Independent implementation of general concepts is permitted when protected SHS code or expression is not copied.</p>
+        </section>
+
+        <section class="sec" id="s17">
+            <div class="sec-head"><div class="sec-num">17</div><h3>Artificial Intelligence and Automated Tools</h3></div>
+            <p>You may use artificial intelligence, automation, code-analysis tools, and development assistants to create your own original Extension, integration, or configuration.</p>
+            <p>You may not use those tools to:</p>
+            <ul>
+                <li>Disguise copied SHS code.</li>
+                <li>Remove ownership notices.</li>
+                <li>Reconstruct protected source code from compiled or packaged content.</li>
+                <li>Reproduce extracted assets.</li>
+                <li>Evade dependency requirements.</li>
+                <li>Create an unauthorized replacement derived from protected SHS material.</li>
+            </ul>
+            <p>Use of an automated tool does not change the ownership or licensing status of SHS Content.</p>
+        </section>
+
+        <section class="sec" id="s18">
+            <div class="sec-head"><div class="sec-num">18</div><h3>Noncommercial and Commercial Use</h3></div>
+            <p>Unless SHS or SHH grants written commercial permission, SHS Content is licensed for noncommercial use.</p>
+            <p>You may not sell, license, rent, commercially distribute, or directly monetize SHS Content without written permission.</p>
+            <p>Commercial or monetized uses that require written permission include:</p>
+            <ul>
+                <li>Paid server access.</li>
+                <li>Subscription-gated or donation-gated access.</li>
+                <li>Paid priority queues.</li>
+                <li>Paid roles, factions, weapons, equipment, cosmetics, vehicles, or content.</li>
+                <li>Purchasable gameplay advantages.</li>
+                <li>Commercial mod packages.</li>
+                <li>Hosting packages that advertise or bundle SHS Content.</li>
+                <li>Licensing fees charged for access to SHS Content.</li>
+                <li>Sponsorships directly tied to access to SHS Content.</li>
+                <li>Other direct or indirect monetization of SHS Content.</li>
+            </ul>
+            <p>Voluntary donations that provide no gameplay advantage, restricted content, priority treatment, access benefit, or other consideration may be allowed when they also comply with platform rules and written SHS guidance.</p>
+            <p>Approval from Bohemia Interactive, a host, payment processor, or another third party does not automatically grant permission to monetize independently owned SHS Content.</p>
+            <p>SHS and SHH are open to reasonable commercial licensing requests. Contact us before launching monetized use so the arrangement can be reviewed clearly and fairly.</p>
+        </section>
+
+        <section class="sec" id="s19">
+            <div class="sec-head"><div class="sec-num">19</div><h3>Trademark and Branding</h3></div>
+            <p>“Shadow Haven™,” “Shadow Haven Studios,” “Shadow Haven Hosting,” “SHS,” “SHH,” associated logos, and related identifiers are marks claimed by their respective owners.</p>
+            <p>You may truthfully refer to SHS Content to:</p>
+            <ul>
+                <li>Identify a required dependency.</li>
+                <li>Describe compatibility.</li>
+                <li>Provide attribution.</li>
+                <li>Explain that an Extension works with SHS Content.</li>
+            </ul>
+            <p>You may not use SHS or SHH marks in a way that:</p>
+            <ul>
+                <li>Suggests official status.</li>
+                <li>Creates confusion about ownership or source.</li>
+                <li>Implies endorsement, sponsorship, or partnership.</li>
+                <li>Uses an SHS or SHH logo without permission.</li>
+                <li>Makes an independent project appear to be an official SHS release.</li>
+                <li>Places “Shadow Haven,” “SHS,” or “SHH” in a project, server, business, or service name in a misleading manner.</li>
+            </ul>
+            <p>Recommended wording includes:</p>
+            <div class="quote">“Community extension for [official SHS project name]” &nbsp;or&nbsp; “Compatible with [official SHS project name]”</div>
+            <p>No trademark license is granted beyond reasonable reference needed to identify compatibility, attribution, or dependency.</p>
+        </section>
+
+        <section class="sec" id="s20">
+            <div class="sec-head"><div class="sec-num">20</div><h3>Community Conduct and Prohibited Uses</h3></div>
+            <p>SHS Content may not be used in a project, server, community, or service that:</p>
+            <ul>
+                <li>Promotes terrorism or violent extremism.</li>
+                <li>Promotes unlawful violence.</li>
+                <li>Promotes hate groups or targeted hatred.</li>
+                <li>Contains sexual exploitation or unlawful sexually explicit material.</li>
+                <li>Harasses or unlawfully targets individuals or communities.</li>
+                <li>Engages in defamation.</li>
+                <li>Falsely claims affiliation with SHS or SHH.</li>
+                <li>Facilitates fraud, malware, unauthorized access, or other unlawful conduct.</li>
+                <li>Materially violates applicable platform rules.</li>
+                <li>Knowingly uses stolen or unlawfully obtained assets.</li>
+                <li>Intentionally harms SHS or SHH through false association or deceptive conduct.</li>
+            </ul>
+            <p>Good-faith criticism, reviews, commentary, parody, reporting, and discussion are allowed, including when unfavorable.</p>
+        </section>
+
+        <section class="sec" id="s21">
+            <div class="sec-head"><div class="sec-num">21</div><h3>Security</h3></div>
+            <p>You may not use SHS Content or an Extension to:</p>
+            <ul>
+                <li>Introduce malicious code.</li>
+                <li>Obtain unauthorized access to a server or system.</li>
+                <li>Collect credentials without authorization.</li>
+                <li>Circumvent security controls.</li>
+                <li>Disrupt SHS or SHH infrastructure.</li>
+                <li>Exploit vulnerabilities against users or systems.</li>
+                <li>Impersonate SHS or SHH personnel.</li>
+                <li>Falsify official updates or security notices.</li>
+            </ul>
+            <p>Security vulnerabilities should be reported privately before public disclosure when reasonably practical.</p>
+        </section>
+
+        <section class="sec" id="s22">
+            <div class="sec-head"><div class="sec-num">22</div><h3>Permissions and Special Use</h3></div>
+            <p>Activities otherwise restricted by this Agreement may be authorized through prior written permission.</p>
+            <p>Permission may be limited by project, server, community, duration, conditions, attribution requirements, branding requirements, fees, or other written terms.</p>
+            <p>Permission granted to one person, project, or community does not automatically apply to another.</p>
+            <p>For important permissions involving redistribution, commercial use, or long-term rights, use a verifiable written channel such as email, a signed agreement, or an official support system.</p>
+        </section>
+
+        <section class="sec" id="s23">
+            <div class="sec-head"><div class="sec-num">23</div><h3>Restricted Parties</h3></div>
+            <p>SHS and SHH may restrict a particular person, organization, server, or community from using SHS Content when there is a documented basis involving:</p>
+            <ul>
+                <li>Repeated license violations.</li>
+                <li>Unauthorized redistribution.</li>
+                <li>Intellectual-property infringement.</li>
+                <li>Fraud or impersonation.</li>
+                <li>Malicious conduct.</li>
+                <li>Evasion of previous enforcement.</li>
+                <li>Material abuse of SHS or SHH services.</li>
+                <li>Failure to comply with a valid takedown or correction request.</li>
+            </ul>
+            <p>Restrictions remain subject to applicable law and existing contractual obligations.</p>
+            <p>A restricted party may not use, host, distribute, extend, monetize, or circumvent restrictions involving SHS Content.</p>
+            <p>No restricted parties are publicly listed at this time.</p>
+        </section>
+
+        <section class="sec" id="s24">
+            <div class="sec-head"><div class="sec-num">24</div><h3>Updates and Compatibility</h3></div>
+            <p>SHS Content may be updated, reorganized, renamed, replaced, or discontinued.</p>
+            <p>SHS and SHH do not guarantee that unofficial Extensions, private modifications, undocumented interfaces, or third-party integrations will remain compatible after an update.</p>
+            <p>Where practical, developers are encouraged to use documented, public, or designated extension points.</p>
+            <p>SHS and SHH may voluntarily help Extension developers, but permission to create an Extension does not require SHS or SHH to review it, debug it, maintain compatibility, provide source files, provide support, endorse it, promote it, or preserve an interface indefinitely.</p>
+        </section>
+
+        <section class="sec" id="s25">
+            <div class="sec-head"><div class="sec-num">25</div><h3>Extension Developer Responsibility</h3></div>
+            <p>An Extension developer is responsible for:</p>
+            <ul>
+                <li>Their original code and assets.</li>
+                <li>Third-party permissions.</li>
+                <li>Accurate project descriptions.</li>
+                <li>Security and functionality.</li>
+                <li>Compliance with platform rules and applicable law.</li>
+                <li>Avoiding infringement of third-party rights.</li>
+                <li>Clearly identifying unofficial status.</li>
+                <li>Ensuring protected SHS Content is not bundled or redistributed.</li>
+            </ul>
+            <p>SHS and SHH are not responsible for unofficial Extensions merely because those Extensions depend on SHS Content.</p>
+        </section>
+
+        <section class="sec" id="s26">
+            <div class="sec-head"><div class="sec-num">26</div><h3>Feedback and Contributions</h3></div>
+            <p>Submitting feedback, bug reports, compatibility information, or suggestions does not transfer ownership of your preexisting intellectual property.</p>
+            <p>Unless otherwise agreed in writing, you grant SHS and SHH a non-exclusive, worldwide, royalty-free license to use voluntarily submitted feedback to improve SHS Content.</p>
+            <p>This feedback license does not apply to complete source-code contributions, original assets, or substantial creative works submitted under separate contribution terms.</p>
+        </section>
+
+        <section class="sec" id="s27">
+            <div class="sec-head"><div class="sec-num">27</div><h3>Friendly Enforcement Approach</h3></div>
+            <p>Our goal is correction, not unnecessary conflict.</p>
+            <p>When a violation appears accidental and can reasonably be fixed, SHS or SHH may first request that the issue be corrected.</p>
+            <p>Possible enforcement actions include:</p>
+            <ul>
+                <li>A request to correct the violation.</li>
+                <li>Removal of an unauthorized download.</li>
+                <li>A platform or Workshop report.</li>
+                <li>A DMCA notice or other intellectual-property complaint.</li>
+                <li>Revocation of permission.</li>
+                <li>Denial of support.</li>
+                <li>Suspension or termination of applicable SHS or SHH services.</li>
+                <li>Refusal of future licensing requests.</li>
+                <li>Legal action where appropriate.</li>
+            </ul>
+            <p>Advance notice may not be provided when immediate action is reasonably necessary to address malware, security threats, fraud, impersonation, deliberate commercial exploitation, large-scale redistribution, evasion of previous enforcement, or ongoing legal harm.</p>
+            <p>A delay or failure to enforce a provision does not waive the right to enforce it later.</p>
+        </section>
+
+        <section class="sec" id="s28">
+            <div class="sec-head"><div class="sec-num">28</div><h3>Disclaimer of Warranties</h3></div>
+            <p>SHS Content is provided “as is” and “as available.”</p>
+            <p>To the maximum extent permitted by law, SHS and SHH disclaim warranties, express, implied, or statutory, including warranties of merchantability, fitness for a particular purpose, non-infringement, compatibility, accuracy, availability, security, error-free operation, and uninterrupted operation.</p>
+            <p>SHS and SHH do not guarantee that SHS Content will:</p>
+            <ul>
+                <li>Work on every system.</li>
+                <li>Remain compatible with every game update.</li>
+                <li>Work with every third-party mod.</li>
+                <li>Be free from defects.</li>
+                <li>Meet every community’s requirements.</li>
+                <li>Prevent data loss, downtime, instability, or other damage.</li>
+            </ul>
+            <p>You use SHS Content at your own risk.</p>
+        </section>
+
+        <section class="sec" id="s29">
+            <div class="sec-head"><div class="sec-num">29</div><h3>Limitation of Liability</h3></div>
+            <p>To the maximum extent permitted by law, SHS, SHH, and their owners, officers, employees, contractors, contributors, licensors, and service providers will not be liable for indirect, incidental, special, exemplary, punitive, or consequential damages arising from or related to SHS Content.</p>
+            <p>This includes lost profits, lost revenue, loss of data, server downtime, business interruption, loss of goodwill, loss of access, mod conflicts, platform enforcement, and third-party claims.</p>
+            <p>To the maximum extent permitted by law, the total liability of SHS and SHH arising from SHS Content will not exceed the greater of:</p>
+            <ol>
+                <li>The amount you directly paid SHS or SHH for the applicable SHS Content during the previous twelve months; or</li>
+                <li>One hundred United States dollars.</li>
+            </ol>
+            <p>Where a jurisdiction does not allow a particular exclusion or limitation, the limitation applies only to the maximum extent permitted.</p>
+        </section>
+
+        <section class="sec" id="s30">
+            <div class="sec-head"><div class="sec-num">30</div><h3>Indemnification</h3></div>
+            <p>To the extent permitted by law, you agree to defend, indemnify, and hold harmless SHS, SHH, and their owners, officers, employees, contractors, and licensors from claims, damages, liabilities, losses, and reasonable expenses arising from:</p>
+            <ul>
+                <li>Your unauthorized redistribution of SHS Content.</li>
+                <li>Your Extension.</li>
+                <li>Your violation of this Agreement.</li>
+                <li>Your infringement of another party’s rights.</li>
+                <li>Your unlawful or malicious use of SHS Content.</li>
+                <li>Your representations about affiliation with SHS or SHH.</li>
+            </ul>
+            <p>This section does not require indemnification for conduct caused solely by the gross negligence or willful misconduct of the party seeking indemnification where such an exclusion is prohibited by law.</p>
+        </section>
+
+        <section class="sec" id="s31">
+            <div class="sec-head"><div class="sec-num">31</div><h3>Term and Termination</h3></div>
+            <p>This Agreement begins when you first download, install, access, host, modify, or use SHS Content.</p>
+            <p>Your license may terminate if you materially violate this Agreement and do not correct the violation after a reasonable opportunity to do so when an opportunity to cure is appropriate.</p>
+            <p>SHS or SHH may terminate permission immediately for intentional unauthorized redistribution, malicious activity, fraud, impersonation, repeated infringement, security attacks, deliberate circumvention of enforcement, or unauthorized commercial exploitation.</p>
+            <p>After termination, you must stop using SHS Content, remove unauthorized copies under your control, stop distributing affected Extensions when continued distribution would violate this Agreement, and stop claiming permission or affiliation.</p>
+            <p>You do not have to delete independently created material that does not contain, depend on, or infringe SHS Content.</p>
+        </section>
+
+        <section class="sec" id="s32">
+            <div class="sec-head"><div class="sec-num">32</div><h3>Changes to This Agreement</h3></div>
+            <p>SHS and SHH may update this Agreement to address new features, distribution methods, platform changes, security issues, legal requirements, or clarifications.</p>
+            <p>The current version should identify its effective date.</p>
+            <p>Changes apply prospectively unless applicable law permits otherwise and the updated terms clearly state a different result.</p>
+            <p>Material changes should be communicated through an official SHS or SHH channel.</p>
+            <p>Continued use after updated terms become effective constitutes acceptance where permitted by law.</p>
+        </section>
+
+        <section class="sec" id="s33">
+            <div class="sec-head"><div class="sec-num">33</div><h3>General Legal Terms</h3></div>
+            <p>You may not assign, transfer, sublicense, or sell rights granted under this Agreement without prior written permission.</p>
+            <p>SHS or SHH may assign this Agreement in connection with a merger, reorganization, sale of assets, project transfer, or change in business structure.</p>
+            <p>This Agreement does not create a partnership, joint venture, employment relationship, franchise, agency relationship, or fiduciary relationship.</p>
+            <p>If a provision is found invalid or unenforceable, it will be enforced to the maximum extent permitted or narrowed as necessary, and the remaining provisions will continue in effect.</p>
+            <p>A failure or delay to enforce a right does not waive that right. A waiver is effective only when made in writing by an authorized representative.</p>
+            <p>This Agreement, together with any applicable written permission or commercial license, forms the complete agreement concerning SHS Content.</p>
+            <p>A specific written permission controls over a conflicting general provision only for the project, party, and activity identified in that permission.</p>
+        </section>
+
+        <section class="sec" id="s34">
+            <div class="sec-head"><div class="sec-num">34</div><h3>Governing Law and Dispute Resolution</h3></div>
+            <p>This Agreement will be governed by the laws of <span class="placeholder">Insert State</span>, without regard to conflict-of-law principles.</p>
+            <p>Any mandatory consumer-protection or other non-waivable rights available in your jurisdiction remain unaffected.</p>
+            <p>Before filing a legal claim, the parties should attempt in good faith to resolve the dispute through written communication for at least thirty days, unless immediate action is reasonably necessary to prevent ongoing infringement, protect security, preserve evidence, meet a legal deadline, or seek emergency relief.</p>
+            <p class="note">Before publication, SHS and SHH should have legal counsel confirm the governing state, venue, and any required dispute-resolution language.</p>
+        </section>
+
+        <section class="sec" id="s35">
+            <div class="sec-head"><div class="sec-num">35</div><h3>Contact and Permission Requests</h3></div>
+            <p>For licensing, monetization, commercial use, compatibility questions, permission requests, takedown disputes, or legal inquiries, contact:</p>
+            <div class="contact">
+                <a href="mailto:lucalis@shadowhavenhosting.net"><span class="k">Email</span> lucalis@shadowhavenhosting.net</a>
+                <a href="https://discord.gg/Pr7aH9ppMj" target="_blank" rel="noopener"><span class="k">Discord</span> discord.gg/Pr7aH9ppMj</a>
+            </div>
+            <p>A permission request should identify:</p>
+            <ul>
+                <li>The requesting person or organization.</li>
+                <li>The relevant SHS project.</li>
+                <li>The proposed Extension or use.</li>
+                <li>Whether the project will be public.</li>
+                <li>Whether the server or project will be monetized.</li>
+                <li>Which SHS files, systems, or interfaces would be affected.</li>
+                <li>Where the project will be distributed.</li>
+            </ul>
+        </section>
+
+        <!-- Plain-language summary -->
+        <section class="card welcome" id="summary" style="margin-top:34px;">
+            <div class="eyebrow">Plain-Language Summary</div>
+            <h2>The short version</h2>
+            <p class="note" style="margin-bottom:20px;">This summary is for convenience only. The full terms above control.</p>
+            <div class="summary-grid">
+                <div class="col may">
+                    <h4><span class="icon-badge">✓</span>You generally may</h4>
+                    <ul>
+                        <li>Use SHS Content on your server.</li>
+                        <li>Configure and tailor SHS systems.</li>
+                        <li>Disable or restrict gameplay features.</li>
+                        <li>Change classifications, balance, and configuration values.</li>
+                        <li>Create original compatibility patches and integrations.</li>
+                        <li>Create original add-ons that require the official SHS dependency.</li>
+                        <li>Create permitted reskins using approved methods.</li>
+                        <li>Make private changes for your server or development team.</li>
+                        <li>Use AI and development tools to create your own original work.</li>
+                        <li>Criticize, review, discuss, or parody SHS Content in good faith.</li>
+                    </ul>
+                </div>
+                <div class="col maynot">
+                    <h4><span class="icon-badge">✕</span>You generally may not</h4>
+                    <ul>
+                        <li>Reupload or mirror the original mod.</li>
+                        <li>Publish a modified copy of the original mod.</li>
+                        <li>Bundle SHS files into another project or server pack.</li>
+                        <li>Extract protected SHS assets.</li>
+                        <li>Remove or bypass the official dependency.</li>
+                        <li>Turn an Extension into a standalone SHS replacement.</li>
+                        <li>Copy SHS code into another framework.</li>
+                        <li>Claim an unofficial project is an official SHS release.</li>
+                        <li>Use SHS logos or branding in a misleading way.</li>
+                        <li>Monetize SHS Content without written permission.</li>
+                        <li>Use SHS Content for malicious, fraudulent, unlawful, or abusive activity.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community intent -->
+        <section class="card intent" id="intent">
+            <h3>Our Community Intent</h3>
+            <p>SHS wants developers and communities to build around our work, not be afraid to touch it.</p>
+            <p>We encourage thoughtful extensions, compatibility work, server customization, original integrations, and creative community projects. The restrictions in this Agreement are primarily intended to protect the official SHS files, source work, assets, branding, distribution channels, and long-term ability to maintain our projects.</p>
+            <p>When in doubt, contact us. We would rather help someone build a compliant project than create unnecessary conflict.</p>
+        </section>
+
+    </main>
+</div>
+
+<footer class="doc-foot">
+    <p class="tm">© <span id="year"></span> Shadow Haven™ Studios LLC &amp; Shadow Haven™ Hosting LLC. All rights reserved.</p>
+    <p>“Shadow Haven,” “SHS,” and “SHH” are marks claimed by their respective owners. Arma Reforger and the Enfusion engine are property of Bohemia Interactive.</p>
+</footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile TOC toggle
+    var toc = document.getElementById('toc');
+    var toggle = document.getElementById('tocToggle');
+    if (window.matchMedia('(max-width:920px)').matches) { toc.classList.remove('open'); }
+    else { toc.classList.add('open'); }
+    toggle.addEventListener('click', function () {
+        var open = toc.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Active section highlighting
+    var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+    var map = {};
+    links.forEach(function (l) { map[l.getAttribute('href').slice(1)] = l; });
+    var sections = links.map(function (l) { return document.getElementById(l.getAttribute('href').slice(1)); }).filter(Boolean);
+
+    var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (e.isIntersecting) {
+                links.forEach(function (l) { l.classList.remove('active'); });
+                var active = map[e.target.id];
+                if (active) {
+                    active.classList.add('active');
+                    active.scrollIntoView({ block: 'nearest' });
+                }
+            }
+        });
+    }, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
+    sections.forEach(function (s) { obs.observe(s); });
+
+    // Close TOC after click on mobile
+    links.forEach(function (l) {
+        l.addEventListener('click', function () {
+            if (window.matchMedia('(max-width:920px)').matches) {
+                toc.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
+</script>
 </body>
 </html>
-```
