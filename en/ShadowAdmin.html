@@ -1,0 +1,605 @@
+<!--
+title: Shadow_Admin
+description: 
+published: true
+date: 2026-08-22T22:03:20.593Z
+tags: 
+editor: code
+dateCreated: 2026-08-22T22:03:20.593Z
+-->
+
+<title>Shadow Haven Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+  /* ============================================================
+     Palette: a printed map sheet. Olive-biased neutrals rather
+     than grey, the panel's own gold as the accent, the compass
+     cyan as the secondary mark.
+     ============================================================ */
+  :root{
+    --ground:#EDEDE7;
+    --surface:#F7F7F3;
+    --sunk:#E3E4DC;
+    --rule:#D0D2C8;
+    --ink:#191C18;
+    --muted:#63685E;
+    --accent:#B4741C;
+    --accent-soft:#F0E2C6;
+    --signal:#3E7488;
+    --alert:#A8412F;
+    --shadow:0 1px 2px rgba(25,28,24,.06);
+
+    --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --f-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+    --measure:66ch;
+    --pad:clamp(20px,5vw,64px);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#15180F;
+      --surface:#1C2018;
+      --sunk:#121509;
+      --rule:#2F3529;
+      --ink:#E9EBE2;
+      --muted:#9AA090;
+      --accent:#E0A03C;
+      --accent-soft:#33290F;
+      --signal:#6FA8BD;
+      --alert:#D4705C;
+      --shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --ground:#15180F;
+    --surface:#1C2018;
+    --sunk:#121509;
+    --rule:#2F3529;
+    --ink:#E9EBE2;
+    --muted:#9AA090;
+    --accent:#E0A03C;
+    --accent-soft:#33290F;
+    --signal:#6FA8BD;
+    --alert:#D4705C;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--f-body);
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad) 96px}
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    border-bottom:2px solid var(--ink);
+    padding:clamp(40px,7vw,84px) 0 26px;
+    margin-bottom:0;
+  }
+  .eyebrow{
+    font-family:var(--f-display);
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  h1{
+    font-family:var(--f-display);
+    font-weight:700;
+    font-size:clamp(38px,6.4vw,72px);
+    line-height:1.02;
+    letter-spacing:-.022em;
+    margin:0 0 20px;
+    text-wrap:balance;
+  }
+  .thesis{
+    font-size:clamp(19px,2.2vw,23px);
+    line-height:1.48;
+    max-width:52ch;
+    margin:0;
+    color:var(--ink);
+  }
+  .thesis em{color:var(--accent);font-style:italic}
+
+  /* ---------- figures strip ---------- */
+  .figures{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px;
+    background:var(--rule);
+    border-bottom:1px solid var(--rule);
+    margin-bottom:clamp(44px,6vw,72px);
+  }
+  .fig{background:var(--ground);padding:18px 16px 20px}
+  .fig b{
+    display:block;
+    font-family:var(--f-mono);
+    font-weight:700;
+    font-size:clamp(22px,3vw,30px);
+    line-height:1.1;
+    letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;
+  }
+  .fig span{
+    display:block;
+    margin-top:5px;
+    font-family:var(--f-display);
+    font-size:11.5px;
+    font-weight:500;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ---------- layout ---------- */
+  .cols{display:grid;grid-template-columns:1fr;gap:0}
+  @media (min-width:1000px){
+    .cols{grid-template-columns:184px 1fr;gap:clamp(36px,5vw,72px);align-items:start}
+    nav.index{position:sticky;top:28px}
+  }
+
+  nav.index{display:none}
+  @media (min-width:1000px){nav.index{display:block}}
+  nav.index p{
+    font-family:var(--f-display);
+    font-size:11px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);
+    margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--rule);
+  }
+  nav.index ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+  nav.index a{
+    font-family:var(--f-display);
+    font-size:13.5px;font-weight:500;
+    color:var(--muted);text-decoration:none;
+    display:block;line-height:1.3;
+  }
+  nav.index a:hover,nav.index a:focus-visible{color:var(--accent)}
+
+  main{min-width:0}
+
+  section{padding:0 0 clamp(40px,6vw,68px)}
+  section + section{border-top:1px solid var(--rule);padding-top:clamp(36px,5vw,56px)}
+
+  h2{
+    font-family:var(--f-display);
+    font-weight:700;
+    font-size:clamp(25px,3.4vw,34px);
+    line-height:1.12;
+    letter-spacing:-.016em;
+    margin:0 0 6px;
+    text-wrap:balance;
+  }
+  .kicker{
+    font-family:var(--f-display);
+    font-size:11.5px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--signal);
+    margin:0 0 22px;
+  }
+  h3{
+    font-family:var(--f-display);
+    font-weight:600;font-size:17px;letter-spacing:-.004em;
+    margin:30px 0 8px;
+  }
+  p{max-width:var(--measure);margin:0 0 16px}
+  p:last-child{margin-bottom:0}
+  strong{font-weight:600}
+  code{
+    font-family:var(--f-mono);
+    font-size:.855em;
+    background:var(--sunk);
+    border:1px solid var(--rule);
+    border-radius:3px;
+    padding:1px 5px;
+    white-space:nowrap;
+  }
+
+  /* ---------- spec strip: machine facts ---------- */
+  .spec{
+    margin:24px 0 4px;
+    border:1px solid var(--rule);
+    background:var(--surface);
+    box-shadow:var(--shadow);
+    overflow-x:auto;
+  }
+  .spec table{border-collapse:collapse;width:100%;min-width:520px}
+  .spec caption{
+    caption-side:top;text-align:left;
+    font-family:var(--f-display);
+    font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--muted);
+    padding:11px 16px 10px;
+    border-bottom:1px solid var(--rule);
+    background:var(--sunk);
+  }
+  .spec th{
+    font-family:var(--f-display);
+    font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);text-align:left;
+    padding:9px 16px;border-bottom:1px solid var(--rule);
+  }
+  .spec td{
+    padding:9px 16px;
+    border-bottom:1px solid var(--rule);
+    font-size:14.5px;
+    vertical-align:top;
+  }
+  .spec tr:last-child td{border-bottom:0}
+  .spec td.k{
+    font-family:var(--f-mono);font-size:12.5px;
+    white-space:nowrap;color:var(--ink);
+  }
+  .spec td.n{
+    font-family:var(--f-mono);font-size:12.5px;
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+
+  /* ---------- pills ---------- */
+  .pill{
+    display:inline-block;
+    font-family:var(--f-display);
+    font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+    padding:2px 7px;border-radius:2px;
+    border:1px solid currentColor;
+    white-space:nowrap;
+  }
+  .pill.on{color:var(--signal)}
+  .pill.off{color:var(--muted)}
+  .pill.hot{color:var(--alert)}
+
+  /* ---------- callout ---------- */
+  .note{
+    border-left:3px solid var(--accent);
+    background:var(--accent-soft);
+    padding:16px 20px;
+    margin:26px 0 4px;
+    max-width:var(--measure);
+  }
+  .note p{margin:0;font-size:16px}
+  .note p + p{margin-top:10px}
+  .note .lbl{
+    font-family:var(--f-display);
+    font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);display:block;margin-bottom:5px;
+  }
+
+  /* ---------- principle cards ---------- */
+  .grid2{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(255px,1fr));
+    gap:1px;background:var(--rule);
+    border:1px solid var(--rule);
+    margin-top:24px;
+  }
+  .card{background:var(--surface);padding:20px 22px 22px}
+  .card h4{
+    font-family:var(--f-display);
+    font-size:15px;font-weight:600;margin:0 0 7px;letter-spacing:-.004em;
+  }
+  .card p{font-size:15px;line-height:1.55;margin:0;color:var(--muted);max-width:none}
+
+  ul.plain{max-width:var(--measure);margin:0 0 16px;padding-left:19px}
+  ul.plain li{margin-bottom:7px}
+
+  footer{
+    border-top:2px solid var(--ink);
+    margin-top:clamp(40px,6vw,64px);
+    padding-top:20px;
+    font-family:var(--f-display);
+    font-size:12.5px;
+    color:var(--muted);
+    display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:space-between;
+  }
+
+  a{color:var(--accent)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Server administration suite &middot; Arma Reforger</p>
+    <h1>Shadow Haven Admin</h1>
+    <p class="thesis">A server-authoritative admin platform built around one idea: <em>if staff can do it, the server writes it down.</em></p>
+  </header>
+
+  <div class="figures">
+    <div class="fig"><b>33,990</b><span>Lines of script</span></div>
+    <div class="fig"><b>60</b><span>Source files</span></div>
+    <div class="fig"><b>17</b><span>Panel tabs</span></div>
+    <div class="fig"><b>11</b><span>Discord signals</span></div>
+    <div class="fig"><b>20</b><span>Persistent stores</span></div>
+  </div>
+
+  <div class="cols">
+
+    <nav class="index" aria-label="Contents">
+      <p>Contents</p>
+      <ol>
+        <li><a href="#what">What it is</a></li>
+        <li><a href="#panel">The panel</a></li>
+        <li><a href="#audit">Accountability</a></li>
+        <li><a href="#anticheat">Anticheat</a></li>
+        <li><a href="#identity">Identity &amp; names</a></li>
+        <li><a href="#arsenal">Arsenal control</a></li>
+        <li><a href="#protection">Spawn &amp; HQ</a></li>
+        <li><a href="#discord">Discord</a></li>
+        <li><a href="#hud">Player HUD</a></li>
+        <li><a href="#fleet">Fleet &amp; hosting</a></li>
+        <li><a href="#principles">How it's built</a></li>
+        <li><a href="#limits">What it won't do</a></li>
+      </ol>
+    </nav>
+
+    <main>
+
+      <section id="what">
+        <p class="kicker">Overview</p>
+        <h2>One panel instead of a console and a spreadsheet</h2>
+        <p>Most Reforger servers are administered through a mix of RCON, a config file nobody wants to touch mid-session, and a Discord channel where staff describe what they just did. Shadow Haven Admin replaces that with an in-game panel that reaches the whole server — players, bans, identities, the arsenal, spawn rules, the HUD — and a record of every action taken through it.</p>
+        <p>The design constraint throughout is that <strong>the server decides</strong>. Panels are a view; the authority is server-side, hooks sit on server components rather than the client that's being audited, and anything a modified client could suppress isn't relied upon. Everything survives a restart in JSON under the server profile — no database, no external service required to run.</p>
+        <p>It runs as a normal Reforger mod. Six engine classes are extended rather than replaced, so it composes with a vanilla Conflict or Game Master setup instead of taking it over.</p>
+      </section>
+
+      <section id="panel">
+        <p class="kicker">Interface</p>
+        <h2>The admin hub</h2>
+        <p>One menu, seventeen tabs, driven by mouse or controller. The roster is live, selection survives the auto-refresh, and each tab reconfigures a shared six-slot action bar so the muscle memory carries across.</p>
+
+        <div class="spec">
+          <table>
+            <caption>Panel tabs</caption>
+            <thead><tr><th>Tab</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td class="k">Overview</td><td>Live posture — FPS, players, AI, entities, uptime, with history graphs</td></tr>
+              <tr><td class="k">Players</td><td>Live roster; clicking a name spectates them</td></tr>
+              <tr><td class="k">Server</td><td>Rolling server console and performance report</td></tr>
+              <tr><td class="k">Moderation</td><td>Kick, temp ban, perm ban, freeze, DM, teleport, bring, return</td></tr>
+              <tr><td class="k">Admin</td><td>Grant or revoke Game Master and admin rights</td></tr>
+              <tr><td class="k">Bans</td><td>Permanent ban list with per-identity staff notes</td></tr>
+              <tr><td class="k">Nametags</td><td>Assign, clear or lock a player's displayed name</td></tr>
+              <tr><td class="k">Anticheat</td><td>Suspect list, event feed, trust flags, per-detector toggles</td></tr>
+              <tr><td class="k">Hosting</td><td>Start, restart, stop and console against the host panel API</td></tr>
+              <tr><td class="k">Webhooks</td><td>Discord routes and per-event switches</td></tr>
+              <tr><td class="k">Audit</td><td>Every GM and admin action, scrollable, server-side</td></tr>
+              <tr><td class="k">SpawnProt</td><td>Personal spawn-protection duration</td></tr>
+              <tr><td class="k">BaseProt</td><td>HQ protection rings and lockdown, edited live</td></tr>
+              <tr><td class="k">Compass</td><td>Server default compass style, colour and north offset</td></tr>
+              <tr><td class="k">MapMarkers</td><td>Friendly map markers and name display</td></tr>
+              <tr><td class="k">Arsenal</td><td>Item blacklist, cost overrides, faction access</td></tr>
+              <tr><td class="k">ServMsgs</td><td>Scheduled broadcast rotation and join message</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="audit">
+        <p class="kicker">Accountability</p>
+        <h2>Every Game Master action, recorded server-side</h2>
+        <p>Game Master is the least accountable role on a Reforger server. A GM who spawns a tank, deletes someone's vehicle or kills a player leaves nothing behind but the result, which makes every accusation a question of who is believed rather than what happened.</p>
+        <p>The audit hooks the <em>server's</em> editable-entity core and the server's kill event — not the editor components, which run on the machine of the person being audited. Spawns, deletions, kills, teamkills and Game Master sessions are all attributed the moment they happen, and a modified client cannot suppress them.</p>
+
+        <h3>Method of death, not just a name</h3>
+        <p>The engine's kill event carries who, never how. Cause is assembled from the killer's equipped weapon and the victim's last damage context, so a row reads <code>KILL &rarr; SomePlayer (Rifle_AK74, gunfire)</code> rather than a bare name. Where nobody pulled a trigger, the damage type answers it — lightning, a fall, fire, drowning.</p>
+        <p>Artillery gets special handling, because it's the case where accountability normally evaporates: a shell is deleted the instant it detonates and its blast carries no authorship at all. Rounds are marked at the point of impact, and a death close enough in time and space is attributed to whoever fired them — flagged as indirect, never as a hands-on kill. AI kills are excluded: spawning a squad is populating a mission, not shooting anyone.</p>
+
+        <div class="spec">
+          <table>
+            <caption>Recorded actions</caption>
+            <thead><tr><th>Action</th><th>Trigger</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td class="k">SPAWN / DELETE</td><td>Editable entity registered or removed</td><td>Only entities with a real author</td></tr>
+              <tr><td class="k">ORDNANCE</td><td>Rounds fired by a person</td><td>Rolled up per fire mission, not per shell</td></tr>
+              <tr><td class="k">KILL / TEAMKILL</td><td>Staff kill, editor open or not</td><td>Cause and weapon attached</td></tr>
+              <tr><td class="k">GM_ENTER / GM_EXIT</td><td>Editor opened or closed</td><td>Polled server-side, survives disconnect</td></tr>
+              <tr><td class="k">ADMIN</td><td>Any panel action</td><td>Mirrored in from the action record</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note">
+          <p><span class="lbl">Why the rollup matters</span>A single mortar mission used to write two log rows per shell — one spawn, one delete — burying a genuine abuse case under hundreds of <code>Mortar Shell</code> lines and churning the whole record cap in one session. Rounds are now counted per firer and written as one line, so the log stays readable under fire.</p>
+        </div>
+      </section>
+
+      <section id="anticheat">
+        <p class="kicker">Anticheat</p>
+        <h2>Evidence, not verdicts</h2>
+        <p>Seven detectors sample every player on a two-second tick. Each one feeds a score in its own category, scores decay over time, and the response is graduated — the system's job is to put a case in front of a human, not to hand down a sentence.</p>
+
+        <div class="spec">
+          <table>
+            <caption>Detectors</caption>
+            <thead><tr><th>Detector</th><th>Threshold</th><th>Weight</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Teleport</td><td class="n">&ge; 160 m between samples</td><td>Strong</td><td><span class="pill on">On</span></td></tr>
+              <tr><td>Speed</td><td class="n">&gt; 18 m/s on foot, 2 strikes</td><td>Strong</td><td><span class="pill on">On</span></td></tr>
+              <tr><td>Fly / noclip</td><td class="n">&ge; 6 m/s climb, 4 samples</td><td>Strong</td><td><span class="pill on">On</span></td></tr>
+              <tr><td>Rate of fire</td><td class="n">&ge; 25 rounds/sec</td><td>Strong</td><td><span class="pill off">Off</span></td></tr>
+              <tr><td>Aim snap</td><td class="n">&ge; 65&deg; onto a target within 4&deg;</td><td>Behavioural</td><td><span class="pill on">On</span></td></tr>
+              <tr><td>Alt account</td><td>Normalised name matches another identity</td><td>Info</td><td><span class="pill on">On</span></td></tr>
+              <tr><td>Ban evasion</td><td>That identity is banned</td><td>Strong</td><td><span class="pill on">On</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Scores decay at two points a minute. Six points notifies staff; fifteen marks a suspect for review, and only if two separate categories have fired does it reach the top level. Admins, Game Masters, trusted identities, vehicle occupants and anyone inside the join grace window are never flagged — a GM flying around in the editor is expected behaviour, not a detection.</p>
+        <p>When a movement, airborne or fire-rate detector trips, it writes an evidence file: up to twenty position, velocity and aim samples around the moment, filed per player. Staff get a DM in game; Discord gets an alert once the score clears the notify threshold.</p>
+
+        <div class="note">
+          <p><span class="lbl">Deliberately conservative</span>The anticheat never bans, and enforcement ships switched off. At its most assertive setting it marks a player for review and rubber-bands them to their last valid position. Rate-of-fire detection is off by default until tuned against a live server, because a false positive on a weapon rate is a false positive on someone playing normally.</p>
+        </div>
+      </section>
+
+      <section id="identity">
+        <p class="kicker">Identity</p>
+        <h2>Names staff control, and a filter that holds</h2>
+        <p>Players can be given a persistent display name and prefix, stored against their identity and mirrored to every client. Staff can lock a name so the player can't change it. Reserved terms stop anyone calling themselves <code>admin</code> or <code>staff</code>, and impersonation checks block taking the name of an online player or a configured admin even while that admin is offline.</p>
+        <p>The slur filter is the part that took real work. A plain substring check catches nothing and is beaten by the first substitution anyone tries, so this one normalises first: lowercase, fold leetspeak back to letters, discard everything else, and keep each run of discarded characters as a single wildcard — which is how a Cyrillic lookalike in the middle of a word still matches. Repeated letters collapse, so a stretched spelling matches too, but only in one direction: the term can never skip a letter, which is what starts producing false hits.</p>
+        <p>False positives are the real cost of a filter like this, so words that hide inside ordinary English are left off the list on purpose, and an allowlist is subtracted from the text before the scan — which is how Scunthorpe and Pakistani survive contact with it. The built-in list isn't editable from config, so an admin can't quietly switch slurs back on.</p>
+
+        <div class="spec">
+          <table>
+            <caption>Nametag enforcement</caption>
+            <tbody>
+              <tr><td>Built-in blocked stems</td><td class="n">35</td></tr>
+              <tr><td>Built-in allowlist entries</td><td class="n">14</td></tr>
+              <tr><td>Kick log retained</td><td class="n">500 records</td></tr>
+              <tr><td>On a hit</td><td>Log, record, Discord alert, staff notification, optional kick</td></tr>
+              <tr><td>On server start</td><td>Every stored name re-scanned and purged if it now trips</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="arsenal">
+        <p class="kicker">Arsenal</p>
+        <h2>Control what the server actually issues</h2>
+        <p>Every item in the game catalogue can be disabled, repriced, or granted to a faction that wouldn't normally get it. Filtering happens at three separate points in the engine's own supply funnel, so a blacklisted item disappears from browse lists and weapon racks alike, on both the client and the server.</p>
+        <p>Cross-faction sharing works either way round: open one faction's catalogue to everyone, or share it into one specific faction. Per-item cost overrides land at the price the UI actually charges.</p>
+        <p>Disabling an item also takes it off the field. A blacklist that only stops an item being <em>taken</em> does nothing about the people already carrying one — drawn before the ban, looted off a body, or handed over by a GM. Every online player is swept the moment the policy changes, then one player per second continuously, and confiscations are logged so an admin can answer the question when a player asks where their rifle went.</p>
+
+        <div class="spec">
+          <table>
+            <caption>Arsenal policy</caption>
+            <tbody>
+              <tr><td>Blacklist</td><td>Item vanishes from every arsenal and rack</td></tr>
+              <tr><td>Cost override</td><td>Per-item supply cost, negative clears</td></tr>
+              <tr><td>Faction assignment</td><td>Offer one item to a faction that lacks it</td></tr>
+              <tr><td>Cross-faction share</td><td>Whole catalogue, to everyone or to one faction</td></tr>
+              <tr><td>Confiscation</td><td>On policy change, then one player per second</td></tr>
+              <tr><td>Panel workflow</td><td>Scrolling list, multi-select, one action per batch</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="protection">
+        <p class="kicker">Spawn &amp; HQ</p>
+        <h2>Spawn camping, answered in stages</h2>
+        <p>Two independent systems. Personal spawn protection makes a freshly spawned player invulnerable for a configurable window that ends the moment they fire — detected by watching their magazine, so reloading or swapping weapons doesn't count against them. It never kicks, bans or moves anyone.</p>
+        <p>HQ protection is the heavier one. Inside their own zone, players can't be damaged and can't shoot — weapons are locked, not just damage disabled, so the safe zone can't be used as a firing position. Enemies approaching a defended HQ escalate through three rings with a grace period at the innermost before anything happens, and every boundary crossing and strike outcome is written to its own log.</p>
+
+        <div class="spec">
+          <table>
+            <caption>Default HQ escalation</caption>
+            <thead><tr><th>Tier</th><th>Range</th><th>Response</th></tr></thead>
+            <tbody>
+              <tr><td>Approach</td><td class="n">1400 m</td><td>Warning banner</td></tr>
+              <tr><td>Final</td><td class="n">1200 m</td><td>Final warning, escalated</td></tr>
+              <tr><td>Lethal</td><td class="n">1175 m</td><td>10 s grace, then guided strike</td></tr>
+              <tr><td>Own zone</td><td class="n">150 m radius</td><td>Invulnerable, weapons locked</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Every one of those numbers is editable from the panel while the server runs, and the panel reconciles them — pull the lethal ring outward past the final ring and the others move with it rather than silently producing an impossible configuration. Zones can be drawn on players' maps so nobody crosses a line they couldn't see.</p>
+      </section>
+
+      <section id="discord">
+        <p class="kicker">Discord</p>
+        <h2>The server reports itself</h2>
+        <p>Eleven signal types across as many webhook routes as you want, each route with its own switches — send kills to one channel, staff actions to a private one, joins nowhere at all. Every embed leads with the server's own name, so a cluster reporting into one Discord stays legible.</p>
+
+        <div class="spec">
+          <table>
+            <caption>Signals</caption>
+            <tbody>
+              <tr><td class="k">GAME MASTER</td><td>Spawns, deletions, fire missions, editor sessions</td></tr>
+              <tr><td class="k">ADMIN ACTION</td><td>Every panel action with its outcome</td></tr>
+              <tr><td class="k">KILL / CASUALTY / FRIENDLY FIRE</td><td>With method of death attached</td></tr>
+              <tr><td class="k">ANTICHEAT ALERT</td><td>Once a suspect clears the notify threshold</td></tr>
+              <tr><td class="k">PLAYER JOIN / LEAVE</td><td>Connection traffic</td></tr>
+              <tr><td class="k">SERVER STATUS</td><td>One live card, edited in place</td></tr>
+              <tr><td class="k">CHAT RELAY</td><td>Batched in-game chat</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Rate limits treated as a design constraint</h3>
+        <p>Discord throttles a webhook at roughly five posts per two seconds, which a Game Master laying out a base will exceed without trying. Rather than let posts get dropped, world-building churn is buffered and posted as one digest every thirty seconds, while anything a person needs to see immediately — a staff kill, a fire mission, someone entering the editor — posts on its own straight away.</p>
+        <p>The live status card is a single message per route, refreshed in place: player count, FPS, AI and entity counts, memory, uptime, and a table of active players with their kill record. Chat relay batches lines and wraps them in a code fence, so nobody can trigger a mention from in game.</p>
+      </section>
+
+      <section id="hud">
+        <p class="kicker">Player-facing</p>
+        <h2>A compass players actually keep on</h2>
+        <p>Not an admin tool — the part of the mod every player sees. Four compass styles including a live terrain minimap, six colours, six screen positions, adjustable range, scale and opacity, friendly and squad markers, and an optional windage readout that reads the real weather system and gives a crosswind component for anyone ranging a shot.</p>
+        <p>Server operators set the defaults; players override them from their own pause menu, and those preferences are stored client-side and never touch the server.</p>
+      </section>
+
+      <section id="fleet">
+        <p class="kicker">Fleet</p>
+        <h2>More than one server</h2>
+        <p>The panel talks to a Pelican-style hosting API — start, restart, stop, kill, run console commands, read live resource usage — and can switch between the servers in your fleet without leaving the game.</p>
+        <p>For clusters, admin lists and permanent bans push between servers on change, and a live command bus lets an action taken on one box land on another: ban someone on your main server and they're banned across the cluster before they finish reconnecting.</p>
+      </section>
+
+      <section id="principles">
+        <p class="kicker">Engineering</p>
+        <h2>How it's built</h2>
+
+        <div class="grid2">
+          <div class="card">
+            <h4>Server-authoritative by default</h4>
+            <p>Hooks sit on server components, never on the client being audited. Where a check could run in either place, it runs where a modified client can't reach it.</p>
+          </div>
+          <div class="card">
+            <h4>Fail visibly</h4>
+            <p>Systems that go quiet are worse than systems that error. Boot logs say whether each subsystem armed; a silently dropped record leaves a bounded trace explaining why.</p>
+          </div>
+          <div class="card">
+            <h4>Graduated response</h4>
+            <p>Detection notifies before it acts, and acts reversibly before it acts permanently. Nothing in the mod issues an automatic ban.</p>
+          </div>
+          <div class="card">
+            <h4>Plain JSON persistence</h4>
+            <p>Twenty stores under the server profile, human-readable and hand-editable. No database, no external dependency, and legacy paths migrate themselves.</p>
+          </div>
+          <div class="card">
+            <h4>Compose, don't replace</h4>
+            <p>Six engine classes extended, none rewritten. It sits alongside vanilla Conflict and Game Master rather than substituting for them.</p>
+          </div>
+          <div class="card">
+            <h4>Version-resilient</h4>
+            <p>Enum names are resolved through reflection rather than hardcoded, so a game update that renames a value changes a label instead of breaking the build.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="limits">
+        <p class="kicker">Scope</p>
+        <h2>What it deliberately doesn't do</h2>
+        <ul class="plain">
+          <li><strong>It never bans automatically.</strong> The anticheat marks and reports; a human decides.</li>
+          <li><strong>Enforcement ships off.</strong> Position correction and review marking are opt-in per server, because every server's normal looks different.</li>
+          <li><strong>It doesn't replace the game mode.</strong> No custom Conflict, no bespoke scoring — it administers what you already run.</li>
+          <li><strong>It doesn't phone home.</strong> Hosting and cluster features point at endpoints you configure; with them off, nothing leaves the box except your own Discord webhooks.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    <span>Shadow Haven Admin &middot; Arma Reforger</span>
+    <span>33,990 lines of EnforceScript across 60 files</span>
+  </footer>
+
+</div>
